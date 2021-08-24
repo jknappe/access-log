@@ -33,6 +33,7 @@
             <th>ID</th>
             <th>Timestamp</th>
             <th>Token</th>
+            <th>Action</th>
             
         </tr>
         <!-- Load registered swipes from DB -->
@@ -44,6 +45,7 @@
                 <td>{{ swipe.id }}</td>
                 <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
                 <td>{{ swipe.token }}</td>
+                <td>{{ swipe.action }}</td>
                 
             </tr>
             {% endif %}

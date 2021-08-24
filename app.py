@@ -10,6 +10,7 @@ db = SQLAlchemy(app)
 class access_log_DB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     token = db.Column(db.String(20), nullable=False)
+    action = db.Column(db.String(20), nullable=False)
     datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -22,12 +23,13 @@ def index():
 
     if request.method == 'POST':
         token = request.form['token']
+        action = request.form['action']
     
         if token == 'admin':
             return redirect('/admin') 
         else:
             if token in valid_tokens:
-                new_entry = access_log_DB(token = token)
+                new_entry = access_log_DB(token = token, action = action)
 
                 try:
                     db.session.add(new_entry)
