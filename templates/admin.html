@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Access Log: Admin Mode</title>
+{% endblock %}
+
+{% block body %}
+
+<div class="content">
+
+    <h1>Access Log</h1>
+
+    <h2>Admin Mode</h2>
+
+    <h3>Export Access Log</h3>
+
+    <button>Export all data</button> <br />
+    <button>Export date range</button>
+
+    <h3>Last 10 logs</h3>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Token</th>
+            <th>Time</th>
+        </tr>
+        <!-- Load registered swipes from DB -->
+        {% for swipe in swipes %} 
+        <!-- Limit output to last 10 -->
+        {% if loop.index <=10 %}
+        <tr>
+            <!-- Print ID, Token ID, datetime -->
+            <td>{{ swipe.id }}</td>
+            <td>{{ swipe.token_id }}</td>
+            <td>{{ swipe.datetime_scanned.replace(microsecond=0) }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </table>
+
+</div>
+
+{% endblock %}

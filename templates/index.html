@@ -7,6 +7,7 @@
 {% block body %}
 <div class="content">
 
+    <!-- INPUT FORM -->
     <form action="/" method="POST" autocomplete="off">
 
         <!-- choose action -->
@@ -24,6 +25,34 @@
     
     </form>
 
+    <!-- DEV: DISPLAY RECENT RECORDS -->
+    <h2>The lastest records</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Timestamp</th>
+            <th>Token</th>
+            <th>Action</th>
+            <th>Name</th>
+            <th>Affiliation</th>
+        </tr>
+        <!-- Load registered swipes from DB -->
+        {% for swipe in swipes %} 
+            <!-- Limit output to last 10 -->
+            {% if loop.index <= 10 %}
+            <tr>
+                <!-- Print ID, Token ID, datetime -->
+                <td>{{ swipe.id }}</td>
+                <td>{{ swipe.datetime_scanned.replace(microsecond=0) }}</td>
+                <td>{{ swipe.token }}</td>
+                <td>{{ swipe.action }}</td>
+                <td>{{ swipe.name }}</td>
+                <td>{{ swipe.affiliations }}</td>
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
 
     
 
