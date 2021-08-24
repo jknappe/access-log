@@ -1,0 +1,3 @@
+- when invalid token is scanned or entered, then render new html page with red bakcground and error message and redirect after 2 seconds back to homepage. allow scanning new tokens in the meantimes.
+- export of data on admin page
+? end ap on admin page

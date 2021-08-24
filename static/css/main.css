@@ -1,0 +1,9 @@
+.content {
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+body{
+    font-family: sans-serif;
+    background-color: #01A672;
+}
