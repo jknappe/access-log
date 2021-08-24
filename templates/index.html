@@ -1,49 +1,31 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Greenroof Access Log</title>
+<title>Access Log</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
 
-    <h1>Swipe a token!</h1>
-
     <form action="/" method="POST" autocomplete="off">
-        <input type="text" name="token_id" id="token_id" autofocus="autofocus" onkeypress="javascript:token_id.focus();" onKeyUp="javascript:token_id.focus();" OnBlur="javascript:token_id.focus();" OnChange="javascript:token_id.focus();" />
+
+        <!-- choose action -->
+        <input type="radio" id="action_ascend" name="action" value="ascend">
+        <label for="action_ascend">Ascend to roof</label><br>
+        <input type="radio" id="action_descend" name="action" value="descend">
+        <label for="action_descend">Descend from roof</label><br>
+        
+        <!-- scan token -->
+        <input type="text" name="token" id="token" autofocus="autofocus" 
+            onkeypress="javascript:token.focus();" 
+            onKeyUp="javascript:token.focus();" 
+            OnBlur="javascript:token.focus();" 
+            OnChange="javascript:token.focus();" />
+    
     </form>
 
 
-    <h2>The lastest registered tokens</h2>
-
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Token</th>
-            <th>Name</th>
-            <th>Affiliation</th>
-            <th>Time</th>
-        </tr>
-        <!-- Load registered swipes from DB -->
-        {% for swipe in swipes %} 
-            <!-- Limit output to last 10 -->
-            {% if loop.index <= 10 %}
-            <tr>
-                <!-- Print ID, Token ID, datetime -->
-                <td>{{ swipe.id }}</td>
-                <td>{{ swipe.token_id }}</td>
-                <td>{{ swipe.name }}</td>
-                <td>{{ swipe.affiliations }}</td>
-                <td>{{ swipe.datetime_scanned.replace(microsecond=0) }}</td>
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-
-    <!-- Control buttons to show/hide input field
     
-        <button onClick="javascript:hide();">Hide Input Field</button> 
-    // -->
 
 </div>
 {% endblock %}
