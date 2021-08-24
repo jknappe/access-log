@@ -33,9 +33,7 @@
             <th>ID</th>
             <th>Timestamp</th>
             <th>Token</th>
-            <th>Action</th>
-            <th>Name</th>
-            <th>Affiliation</th>
+            
         </tr>
         <!-- Load registered swipes from DB -->
         {% for swipe in swipes %} 
@@ -44,11 +42,9 @@
             <tr>
                 <!-- Print ID, Token ID, datetime -->
                 <td>{{ swipe.id }}</td>
-                <td>{{ swipe.datetime_scanned.replace(microsecond=0) }}</td>
+                <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
                 <td>{{ swipe.token }}</td>
-                <td>{{ swipe.action }}</td>
-                <td>{{ swipe.name }}</td>
-                <td>{{ swipe.affiliations }}</td>
+                
             </tr>
             {% endif %}
         {% endfor %}

@@ -7,9 +7,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///access-log.db'
 app.secret_key = 'fgd2L"))+=23F4Q8z\n\xec]/'
 db = SQLAlchemy(app)
 
-class access_log(db.Model):
+class access_log_DB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    action = db.Column(db.String(20), nullable=False)
     token = db.Column(db.String(20), nullable=False)
     datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -25,31 +24,32 @@ def index():
         token = request.form['token']
     
         if token == 'admin':
-            return redirect('/admin') # redirect to '/admin'
+            return redirect('/admin') 
         else:
             if token in valid_tokens:
-                new_token = access_log(token=token)
+                new_entry = access_log_DB(token = token)
 
                 try:
-                    db.session.add(new_token)
+                    db.session.add(new_entry)
                     db.session.commit()
-                    return redirect('/success') # redirect to '/success'
+                    return redirect('/')
                 except:
                     return 'Could not write to data base.'
+
             else:
                 error = 'The token you scanned is not registered, please use one of the valid access tokens.'
                 ## swipes = access_log.query.order_by(access_log.datetime.desc()).all()
-                return render_template('/') # redirect to 'invalid.html', error=error
+                return render_template('/invalid.html', error = error) # redirect to 'invalid.html', error=error
 
     else:
         # read swipes data from the database
-        swipes = access_log.query.order_by(access_log.datetime.desc()).all()
+        swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
         # render the index pages with swipes data available
         return render_template('index.html', swipes=swipes)
 
 @app.route('/admin')
 def admin():
-    swipes = access_log.query.order_by(access_log.datetime.desc()).all()
+    swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
     return render_template('admin.html', swipes=swipes)
 
 if __name__ == "__main__":
