@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Access Log: Descend</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+
+    <h1>Descend</h1>
+
+    Please swipe your token to log your descend. <br /> <br />
+
+    <form id="descend_form" name="descend_form" action="{{ url_for('descend_form') }}" method="POST" autocomplete="off">
+        
+        <input type="hidden" name="action" value="descend">
+        <input type="hidden" name="name" value="NA">
+        <input type="hidden" name="affiliation" value="NA">
+        <input type="text" name="token" id="token" autofocus="autofocus" onkeypress="javascript:token.focus();" onKeyUp="javascript:token.focus();" OnBlur="javascript:token.focus();" OnChange="javascript:token.focus();" />
+    
+    </form>    
+
+</div>
+{% endblock %}

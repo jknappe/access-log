@@ -18,8 +18,8 @@ class access_log_DB(db.Model):
     def __repr__(self):
         return '<id %r>' % self.id
 
-@app.route('/ascend', methods=['POST', 'GET'])
-def ascend():
+@app.route('/ascend_form', methods=['POST', 'GET'])
+def ascend_form():
     error = None
     valid_tokens = ['t', '0001101747' , '0001964054', '0014488389', '0014405751', '0004033874', '0014580266', '0001951950', '0007000492', '0014502443', '0014552070']
 
@@ -35,7 +35,7 @@ def ascend():
             try:
                 db.session.add(new_entry)
                 db.session.commit()
-                return redirect('/success')
+                return redirect('/ascend_success')
             except:
                 return 'Could not write to data base.'
 
@@ -48,7 +48,37 @@ def ascend():
         # read swipes data from the database
         swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
         # render the index pages with swipes data available
-        return render_template('ascend.html', swipes=swipes)
+        return render_template('ascend_form.html', swipes=swipes)
+
+@app.route('/descend_form', methods=['POST', 'GET'])
+def descend_form():
+    error = None
+    valid_tokens = ['t', '0001101747' , '0001964054', '0014488389', '0014405751', '0004033874', '0014580266', '0001951950', '0007000492', '0014502443', '0014552070']
+
+    if request.method == 'POST':
+        token = request.form['token']
+        action = request.form['action']
+        name = request.form['name']
+        affiliation = request.form['affiliation']
+    
+        if token in valid_tokens:
+            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+
+            try:
+                db.session.add(new_entry)
+                db.session.commit()
+                return redirect('/descend_success')
+            except:
+                return 'Could not write to data base.'
+
+        else:
+            error = 'The token you scanned is not registered, please use one of the valid access tokens.'
+            return render_template('/invalid.html', error = error)
+
+    else:
+        # render descend_form page
+        return render_template('descend_form.html')
+
 
 @app.route('/admin')
 def admin():
@@ -59,9 +89,13 @@ def admin():
 def index():
     return render_template('index.html')
 
-@app.route('/success')
-def success():
-    return render_template('success.html')
+@app.route('/ascend_success')
+def ascend_uccess():
+    return render_template('ascend_success.html')
+
+@app.route('/descend_success')
+def descend_uccess():
+    return render_template('descend_success.html')
 
 if __name__ == "__main__":
      app.run(debug=True)

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>ADescend: Success</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+
+        <h1>Thank You!</h1>    
+        <h2>Please return your token to the token holder.</h2>    
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 3000);
+
+    </script>
+
+{% endblock %}
