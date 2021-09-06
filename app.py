@@ -29,23 +29,20 @@ def ascend():
         name = request.form['name']
         affiliation = request.form['affiliation']
     
-        if token == 'admin':
-            return redirect('/admin') 
+        if token in valid_tokens:
+            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+
+            try:
+                db.session.add(new_entry)
+                db.session.commit()
+                return redirect('/ascend')
+            except:
+                return 'Could not write to data base.'
+
         else:
-            if token in valid_tokens:
-                new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
-
-                try:
-                    db.session.add(new_entry)
-                    db.session.commit()
-                    return redirect('/')
-                except:
-                    return 'Could not write to data base.'
-
-            else:
-                error = 'The token you scanned is not registered, please use one of the valid access tokens.'
-                ## swipes = access_log.query.order_by(access_log.datetime.desc()).all()
-                return render_template('/invalid.html', error = error) # redirect to 'invalid.html', error=error
+            error = 'The token you scanned is not registered, please use one of the valid access tokens.'
+            ## swipes = access_log.query.order_by(access_log.datetime.desc()).all()
+            return render_template('/invalid.html', error = error) # redirect to 'invalid.html', error=error
 
     else:
         # read swipes data from the database

@@ -7,34 +7,39 @@
 {% block body %}
 <div class="content">
 
-    <h1>Ascend</h1>
+    <h1>Ascending to the roof</h1>
 
-    Please enter your details for the roof access log. <br /> <br />
+    Please provide details.
 
+    <!-- INPUT FORM -->
     <form id="ascend_form" name="ascend_form" action="{{ url_for('ascend') }}" method="POST">
 
+        <!-- define action -->
         <div class="group">
+            <input type="hidden" name="action" value="ascend">
+
+        <!-- provide user data -->
+        
             <label for="name">Name</label><br />
             <input type="text" name="name" id="name" /> <br />
         </div>
-
         <div class="group">
             <label for="affiliation">Affiliation</label><br />
-            <input type="text" name="affiliation" id="affiliation" /> <br />   
+            <input type="text" name="affiliation" id="affiliation" /> <br />        
         </div>
-
+                
+        <!-- scan token -->
         <div class="group">
-            <input type="hidden" name="action" value="ascend">
-            <input type="text" name="token" id="token" autocomplete="off"/> <br />
+            <label for="token">Scan your token now!</label><br />
+            <input type="text" name="token" id="token" /> <br />
         </div>
 
-        <div>
-            <button id="btnSubmit" type="submit">Next</button>
-        </div>  
-
+         <div>
+            <button id="btn-submit" type="submit">Next</button>
+        </div>     
     </form>
 
-    
+ 
 
     <!-- DEV: DISPLAY RECENT RECORDS -->
     <h2>The lastest records</h2>

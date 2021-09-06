@@ -33,7 +33,7 @@
             <!-- Print ID, Token ID, datetime -->
             <td>{{ swipe.id }}</td>
             <td>{{ swipe.token_id }}</td>
-            <td>{{ swipe.datetime_scanned.replace(microsecond=0) }}</td>
+            <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
         </tr>
         {% endif %}
         {% endfor %}
