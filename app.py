@@ -35,7 +35,7 @@ def ascend():
             try:
                 db.session.add(new_entry)
                 db.session.commit()
-                return redirect('/ascend')
+                return redirect('/success')
             except:
                 return 'Could not write to data base.'
 
@@ -58,6 +58,10 @@ def admin():
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/success')
+def success():
+    return render_template('success.html')
 
 if __name__ == "__main__":
      app.run(debug=True)

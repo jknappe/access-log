@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Access Log: Success</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+
+        <h2>Use code</h2>
+        <h1>2407</h1>
+        <h2>to access the key locker</h2>
+        
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 3000);
+
+    </script>
+
+{% endblock %}
