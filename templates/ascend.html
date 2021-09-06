@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Access Log: Ascend</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+
+    <h1>Ascending to the roof</h1>
+
+    Please provide details.
+
+    <!-- INPUT FORM -->
+    <form action="" method="POST">
+
+        <!-- define action -->
+        <input type="hidden" name="action" value="ascend">
+
+        <!-- provide user data -->
+        <label for="name">Name</label><br />
+        <input type="text" name="name" id="name" /> <br />
+        <label for="affiliation">Affiliation</label><br />
+        <input type="text" name="affiliation" id="affiliation" /> <br />
+        
+        <!-- scan token -->
+        <input type="text" name="token" id="token" /> <br />
+    
+    </form>
+
+    <!-- DEV: DISPLAY RECENT RECORDS -->
+    <h2>The lastest records</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Timestamp</th>
+            <th>Token</th>
+            <th>Action</th>
+            
+        </tr>
+        <!-- Load registered swipes from DB -->
+        {% for swipe in swipes %} 
+            <!-- Limit output to last 10 -->
+            {% if loop.index <= 10 %}
+            <tr>
+                <!-- Print ID, Token ID, datetime -->
+                <td>{{ swipe.id }}</td>
+                <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
+                <td>{{ swipe.token }}</td>
+                <td>{{ swipe.action }}</td>
+                
+            </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+    
+
+</div>
+{% endblock %}

@@ -7,49 +7,12 @@
 {% block body %}
 <div class="content">
 
-    <!-- INPUT FORM -->
-    <form action="/" method="POST" autocomplete="off">
-
-        <!-- choose action -->
-        <input type="radio" id="action_ascend" name="action" value="ascend">
-        <label for="action_ascend">Ascend to roof</label><br>
-        <input type="radio" id="action_descend" name="action" value="descend">
-        <label for="action_descend">Descend from roof</label><br>
-        
-        <!-- scan token -->
-        <input type="text" name="token" id="token" autofocus="autofocus" 
-            onkeypress="javascript:token.focus();" 
-            onKeyUp="javascript:token.focus();" 
-            OnBlur="javascript:token.focus();" 
-            OnChange="javascript:token.focus();" />
-    
-    </form>
-
-    <!-- DEV: DISPLAY RECENT RECORDS -->
-    <h2>The lastest records</h2>
-
-    <table>
+    <!-- select ascend/descend -->
+    <table name="choose_action">
         <tr>
-            <th>ID</th>
-            <th>Timestamp</th>
-            <th>Token</th>
-            <th>Action</th>
-            
+            <td><a href="{{ url_for('ascend') }}"><img src="/static/img/arrow_up.png" width="300px" class="arrow-image" /> <br /> Ascend</a></td>
+            <td><a href="{{ url_for('admin') }}"><img src="/static/img/arrow_down.png" width="300px" class="arrow-image" /> Descend</a></td>                           
         </tr>
-        <!-- Load registered swipes from DB -->
-        {% for swipe in swipes %} 
-            <!-- Limit output to last 10 -->
-            {% if loop.index <= 10 %}
-            <tr>
-                <!-- Print ID, Token ID, datetime -->
-                <td>{{ swipe.id }}</td>
-                <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
-                <td>{{ swipe.token }}</td>
-                <td>{{ swipe.action }}</td>
-                
-            </tr>
-            {% endif %}
-        {% endfor %}
     </table>
 
     

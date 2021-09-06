@@ -11,25 +11,29 @@ class access_log_DB(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     token = db.Column(db.String(20), nullable=False)
     action = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    affiliation = db.Column(db.String(100), nullable=False)
     datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
         return '<id %r>' % self.id
 
-@app.route('/', methods=['POST', 'GET'])
-def index():
+@app.route('/ascend', methods=['POST', 'GET'])
+def ascend():
     error = None
     valid_tokens = ['t', '0001101747' , '0001964054', '0014488389', '0014405751', '0004033874', '0014580266', '0001951950', '0007000492', '0014502443', '0014552070']
 
     if request.method == 'POST':
         token = request.form['token']
         action = request.form['action']
+        name = request.form['name']
+        affiliation = request.form['affiliation']
     
         if token == 'admin':
             return redirect('/admin') 
         else:
             if token in valid_tokens:
-                new_entry = access_log_DB(token = token, action = action)
+                new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
 
                 try:
                     db.session.add(new_entry)
@@ -47,12 +51,16 @@ def index():
         # read swipes data from the database
         swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
         # render the index pages with swipes data available
-        return render_template('index.html', swipes=swipes)
+        return render_template('ascend.html', swipes=swipes)
 
 @app.route('/admin')
 def admin():
     swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
     return render_template('admin.html', swipes=swipes)
+    
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 if __name__ == "__main__":
      app.run(debug=True)
