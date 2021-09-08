@@ -14,28 +14,35 @@
 
     <h3>Export Access Log</h3>
 
-    <button>Export all data</button> <br />
-    <button>Export date range</button>
+    
+       <a href="{{ url_for('download_data') }}">Download data</a>
 
-    <h3>Last 10 logs</h3>
+
+
+    <!-- DEV: DISPLAY ALL RECORDS -->
+    <h2>Recorded logs</h2>
 
     <table>
         <tr>
             <th>ID</th>
+            <th>Timestamp</th>
             <th>Token</th>
-            <th>Time</th>
+            <th>Name</th>
+            <th>Affiliation</th>
+            <th>Action</th>
+            
         </tr>
-        <!-- Load registered swipes from DB -->
-        {% for swipe in swipes %} 
-        <!-- Limit output to last 10 -->
-        {% if loop.index <=10 %}
-        <tr>
-            <!-- Print ID, Token ID, datetime -->
-            <td>{{ swipe.id }}</td>
-            <td>{{ swipe.token_id }}</td>
-            <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
-        </tr>
-        {% endif %}
+        <!-- Load registered records from DB -->
+        {% for record in data %} 
+            <tr>
+                <!-- Print ID, Token ID, datetime -->
+                <td>{{ record.id }}</td>
+                <td>{{ record.datetime.replace(microsecond=0) }}</td>
+                <td>{{ record.token }}</td>
+                <td>{{ record.name}}</td>
+                <td>{{ record.affiliation }}</td>
+                <td>{{ record.action }}</td>                
+            </tr>
         {% endfor %}
     </table>
 

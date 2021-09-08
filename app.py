@@ -2,6 +2,9 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
+
+import flask_excel as excel
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///access-log.db'
 app.secret_key = 'fgd2L"))+=23F4Q8z\n\xec]/'
@@ -82,20 +85,55 @@ def descend_form():
 
 @app.route('/admin')
 def admin():
-    swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
-    return render_template('admin.html', swipes=swipes)
+    data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
+    if request.method == "POST":
+        return render_template('index.html')
+   
+    return render_template('admin.html', data=data)
+
+
+
+@app.route('/download', methods=['GET'])
+def download_data():
+    id = access_log_DB.query.with_entities(access_log_DB.id).order_by(access_log_DB.datetime.desc()).all()
+    datetime = access_log_DB.query.with_entities(access_log_DB.datetime).order_by(access_log_DB.datetime.desc()).all()
+    token = access_log_DB.query.with_entities(access_log_DB.token).order_by(access_log_DB.datetime.desc()).all()
+    name = access_log_DB.query.with_entities(access_log_DB.name).order_by(access_log_DB.datetime.desc()).all()
+    affiliation = access_log_DB.query.with_entities(access_log_DB.affiliation).order_by(access_log_DB.datetime.desc()).all()
+    action = access_log_DB.query.with_entities(access_log_DB.action).order_by(access_log_DB.datetime.desc()).all()
+    excel.init_excel(app)
+    extension_type = "csv"
+    # filename = "access_log_" + datetime.today().strftime('%Y%m%d') + "." + extension_type
+    filename = "access_log_" + "." + extension_type
+    d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
+    return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
+
+
+
+
     
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/ascend_success')
-def ascend_uccess():
+def ascend_success():
     return render_template('ascend_success.html')
 
 @app.route('/descend_success')
-def descend_uccess():
+def descend_success():
     return render_template('descend_success.html')
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
      app.run(debug=True)
+
