@@ -17,6 +17,13 @@
         </tr>
     </table>
 
+    <!-- hidden inut filed for access to admin page; type 'admin' + ENTER to access --> 
+
+    <form id="admin_access" name="admin_access" action="{{ url_for('admin') }}" method="POST" autocomplete="off">
+        
+        <input type="text" name="token" id="token" autofocus="autofocus" onkeypress="javascript:token.focus();" onKeyUp="javascript:token.focus();" OnBlur="javascript:token.focus();" OnChange="javascript:token.focus();" />
+    
+    </form>  
     
 
 </div>

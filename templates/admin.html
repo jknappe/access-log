@@ -8,34 +8,38 @@
 
 <div class="content">
 
-    <h1>Access Log</h1>
+    <h1>Admin Mode</h1>
 
-    <h2>Admin Mode</h2>
+    <h2>Eintrge exortieren <br />Export records</h2>
 
-    <h3>Export Access Log</h3>
-
-    <p>
+    <div class="deutsch">
+        Hier klicken, um Daten des Access Log lokal im 'Download'-Ordner als CSV-Datei zu speichern.
+    </div>
+    <div class="english">
         Click the button below to download all Access Log records in CSV format. The data will be saved in the download folder.
-    </p>
+    </div>
+
+    <br />
     
-       <a href="{{ url_for('download_data') }}" class="link-button">Download data</a>
+       <a href="{{ url_for('download_data') }}" class="next-button">Daten exportieren<br /><i>Export data</i> </a>
 
-    <h3>Go back to landing page</h3>
-
-    <p>
-        Click the button below to return to the landing page.
-    </p>
-
-       <a href="{{ url_for('index') }}" class="link-button">Go back</a>
-
+    <hr />
+    <!-- retuen home button -->
+    <a href="{{ url_for('index') }}" class="home-button">Zurück<br /><i>Back</i> </a>
+    <hr />
     
-    <h2>Recorded logs</h2>
+    <h2>Letzte Einträge <br />Recent logs</h2>
 
-    <p>
-        Below you can see the last 25 records in the Access Log.
-    </p>
+    <div class="deutsch">
+        Dies sind die letzten 25 Einträge im Access Log.
+    </div>
+    <div class="english">
+        these are the 25 most recent records in the Access Log.
+    </div>
 
-    <table>
+    <br />
+
+    <table name="admin">
         <tr>
             <th>ID</th>
             <th>Timestamp</th>

@@ -1,5 +1,5 @@
 .content {
-    max-width: 500px;
+    max-width: 800px;
     margin: 0 auto;
   }
 
@@ -84,6 +84,11 @@ label.english {
 table[name=choose_action]{
   text-align: center;
   font-size: 1.0em;
+}
+
+table[name=admin]{
+  text-align: left;
+  font-size: 0.7em;
 }
 
 .arrow-image:hover{

@@ -89,12 +89,9 @@ def descend_form():
         return render_template('descend_form.html')
 
 
-@app.route('/admin')
+@app.route('/admin', methods=['POST', 'GET'])
 def admin():
-    data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
-    if request.method == "POST":
-        return render_template('index.html')
-   
+    data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   
     return render_template('admin.html', data=data)
 
 
@@ -119,6 +116,10 @@ def download_data():
     
 @app.route('/')
 def index():
+    if request.method == 'POST':
+        token = request.form['token']
+        if token == 'admin':
+            return render_template('admin.html')
     return render_template('index.html')
 
 @app.route('/ascend_success')
