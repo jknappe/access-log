@@ -10,8 +10,10 @@
     <!-- select ascend/descend -->
     <table name="choose_action">
         <tr>
-            <td><a href="{{ url_for('ascend_form') }}"><img src="/static/img/arrow_up.png" width="300px" class="arrow-image" /> <br /> Ascend</a></td>
-            <td><a href="{{ url_for('descend_form') }}"><img src="/static/img/arrow_down.png" width="300px" class="arrow-image" /> Descend</a></td>                           
+            <td><a href="{{ url_for('ascend_form') }}"><img src="/static/img/arrow_up.png" width="300px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('ascend_form') }}" class="link-button">Eintragen <br /> <i>Log in</i> </a></td>
+            <td><a href="{{ url_for('descend_form') }}"><img src="/static/img/arrow_down.png" width="300px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('descend_form') }}" class="link-button">Austragen <br /> <i>Log out</i> </a></td>                           
         </tr>
     </table>
 

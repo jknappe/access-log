@@ -3,23 +3,160 @@
     margin: 0 auto;
   }
 
+html{ 
+  font-size: 32px; 
+} 
+
+
+h1 { 
+  font-size: 1.5em; 
+  font-style: italic;
+  color: #333333;
+}
+h1:first-line {
+  font-size: 1.5em; 
+  font-style: normal;
+  color: #000000;
+}
+
+h2 { 
+  font-size: 1.3em; 
+  font-style: italic;
+  color: #333333;
+}
+h2:first-line {
+  font-size: 1.3em; 
+  font-style: normal;
+  color: #000000;
+}
+
 body{
-    font-family: sans-serif;
-    background-color: #01A672;
+  font-family: sans-serif;
+  background-color: #669CC6;
+}
+
+div.deutsch {
+  font-size: 0.8125em;
+  font-style: normal;
+  color: #000000;
+}
+
+div.english {
+  font-size: 0.8em;
+  font-style: italic;
+  color: #333333;
+}
+
+div.success_deutsch {
+  font-size: 1.5em;
+  font-style: normal;
+  text-align: center;
+  color: #000000;
+}
+
+div.success_english {
+  font-size: 1.0em;
+  font-style: italic;
+  text-align: center;
+  color: #333333;
+}
+
+
+div.code {
+  font-size: 3.0em;
+  font-style: normal;
+  font-weight: bold;
+  background-color: #333333;
+  text-align: center;
+  color: #ffffff;
+}
+
+label.deutsch {
+  font-style: normal;
+  color: #000000;
+}
+
+label.english {
+  font-style: italic;
+  color: #333333;
 }
 
 table[name=choose_action]{
   text-align: center;
-  font-size: 2.5em;
+  font-size: 1.0em;
 }
 
 .arrow-image:hover{
   background-color: white;
+  border-radius: 56px;
   /*rest of styles not related to on hover state change*/
 }
 .arrow-image:active{
   background-color: yellow;
+  border-radius: 56px;
   /*rest of styles not related to on hover state change*/
 }
 
+.link-button {
+  background-color: #5A696E;
+  border: none;
+  color: white;
+  padding: 20px 34px;
+  font-style: italic;
+  color: #dddddd;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.5em;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.link-button:first-line {
+  font-style: normal;
+  color: #ffffff;
+}
 
+.next-button {
+  background-color: #5A696E;
+  border: none;
+  color: white;
+  padding: 20px 34px;
+  font-style: italic;
+  color: #dddddd;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.0em;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.home-button:first-line {
+  font-style: normal;
+  color: #ffffff;
+}
+
+.home-button {
+  background-color: #b54454;
+  border: none;
+  color: white;
+  padding: 20px 34px;
+  font-style: italic;
+  color: #dddddd;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.0em;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.next-button:first-line {
+  font-style: normal;
+  color: #ffffff;
+}
+
+input {
+	padding: 10px 15px;
+	box-sizing: border-box;
+  width: max-content;
+  background-color: antiquewhite;
+}

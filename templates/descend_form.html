@@ -1,15 +1,21 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Access Log: Descend</title>
+<title>Austragen / Log Out</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
 
-    <h1>Descend</h1>
+    <h1>Austragen<br /> Log out</h1>
 
-    Please swipe your token to log your descend. <br /> <br />
+    <div class="deutsch">
+        Bitte halten Sie Ihren Dongle an das Lesegerät, um sich auszutragen.
+    </div>
+
+    <div class="english">
+        Please swipe your dongle to log out.
+    </div>
 
     <form id="descend_form" name="descend_form" action="{{ url_for('descend_form') }}" method="POST" autocomplete="off">
         
@@ -21,4 +27,15 @@
     </form>    
 
 </div>
+
+<!-- JS for automatic redirect after two minutes -->
+<script>    
+    window.setTimeout(function(){
+
+    // Move to a new location or you can do something else
+    window.location.href = "/";
+
+    }, 120000);
+
+</script>
 {% endblock %}

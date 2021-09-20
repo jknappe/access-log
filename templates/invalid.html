@@ -4,20 +4,31 @@
 <style>
     body {background-color: #ff0f0f;}
    </style>
-<title>Access Log: Invalid Token</title>
+<title>Ungültiger Dongle / Invalid dongle</title>
 {% endblock %}
 
 {% block body %}
 
 <div class="content">
 
-    <h1>ERROR</h1>
+    <h1>FEHLER<br /> ERROR</h1>
 
     {% if error %}
+
+    <div class="deutsch">
         <p class=error>
             <strong>Invalid token:</strong> <br />
-            {{ error }}
+            {{ errorDE }}
         </p>
+    </div>
+
+    <div class="english">
+        <p class=error>
+            <strong>Invalid token:</strong> <br />
+            {{ errorEN }}
+        </p>
+    </div>
+
     {% endif %}   
 
 </div>
@@ -29,7 +40,7 @@
       // Move to a new location or you can do something else
       window.location.href = "/";
 
-      }, 2000);
+      }, 4000);
 
 </script>
 

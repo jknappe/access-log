@@ -1,17 +1,28 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Access Log: Success</title>
+    <title>Eintragung erfolgreich / Log in successful</title>
 {% endblock %}
 
 {% block body %}
 
     <div class="content">
 
-        <h2>Use code</h2>
-        <h1>2407</h1>
-        <h2>to access the key locker</h2>
+        <div class="success_deutsch">
+            Der Code für den Schlüsselkasten lautet:
+        </div>
         
+        <br />
+
+        <div class="success_english">
+            The code for the key box is:
+        </div>
+        
+        <br />
+
+        <div class="code">
+            2 4 0 7
+        </div>    
 
     </div>
 
@@ -22,7 +33,7 @@
         // Move to a new location or you can do something else
         window.location.href = "/";
 
-        }, 3000);
+        }, 10000);
 
     </script>
 

@@ -1,73 +1,69 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Access Log: Ascend</title>
+<title>Eintragen / Log In</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
+    
+    <h1>Eintragen<br /> Log in</h1>
 
-    <h1>Ascend</h1>
+    <div class="deutsch">
+        Bitte registrieren Sie sich für Ihren Besuch des Forschungsgründachs.
+    </div>
 
-    Please enter your details for the roof access log. <br /> <br />
+    <div class="english">
+        Please register your visit to the research green roof.
+    </div>
+
+    <br />
+    <hr />
 
     <form id="ascend_form" name="ascend_form" action="{{ url_for('ascend_form') }}" method="POST">
 
         <div class="group">
-            <label for="name">Name</label><br />
+            <label for="name" class="deutsch">Name</label>
+            <label for="name" class="english">Name</label><br />
             <input type="text" name="name" id="name" /> <br />
+            <br />
         </div>
 
         <div class="group">
-            <label for="affiliation">Affiliation</label><br />
+            <label for="affiliation" class="deutsch">Department/Firma</label>
+            <label for="affiliation" class="english">Affiliation</label><br />
             <input type="text" name="affiliation" id="affiliation" /> <br />   
+            <br />
         </div>
 
         <div class="group">
-            <input type="hidden" name="action" value="ascend">
+            <label for="action" class="deutsch">Bitte halten Sie jetzt den Dongle an das Lesegerät.<br /></label>
+            <label for="action" class="english">Please swipe your dongle now.</label><br />
+            <input type="hidden" name="action" value="log-in">
             <input type="text" name="token" id="token" autocomplete="off"/> <br />
         </div>
 
         <div>
-            <button id="btnSubmit" type="submit">Next</button>
+            <button id="btnSubmit" type="submit" class="next-button">Weiter<br /><i>Next</i></button>
         </div>  
 
     </form>
-
     
+    <hr />
 
-    <!-- DEV: DISPLAY RECENT RECORDS -->
-    <h2>The lastest records</h2>
-
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Timestamp</th>
-            <th>Token</th>
-            <th>Name</th>
-            <th>Affiliation</th>
-            <th>Action</th>
-            
-        </tr>
-        <!-- Load registered swipes from DB -->
-        {% for swipe in swipes %} 
-            <!-- Limit output to last 10 -->
-            {% if loop.index <= 10 %}
-            <tr>
-                <!-- Print ID, Token ID, datetime -->
-                <td>{{ swipe.id }}</td>
-                <td>{{ swipe.datetime.replace(microsecond=0) }}</td>
-                <td>{{ swipe.token }}</td>
-                <td>{{ swipe.name}}</td>
-                <td>{{ swipe.affiliation }}</td>
-                <td>{{ swipe.action }}</td>
-                
-            </tr>
-            {% endif %}
-        {% endfor %}
-    </table>
-
-    
+    <a href="{{ url_for('index') }}" class="home-button" id="home-button">Abbrechen<br /><i>Cancel</i> </a>
 
 </div>
+
+    <!-- JS for automatic redirect after two minutes -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 120000);
+
+    </script>
+
 {% endblock %}

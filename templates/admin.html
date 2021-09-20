@@ -14,13 +14,26 @@
 
     <h3>Export Access Log</h3>
 
+    <p>
+        Click the button below to download all Access Log records in CSV format. The data will be saved in the download folder.
+    </p>
     
-       <a href="{{ url_for('download_data') }}">Download data</a>
+       <a href="{{ url_for('download_data') }}" class="link-button">Download data</a>
 
+    <h3>Go back to landing page</h3>
 
+    <p>
+        Click the button below to return to the landing page.
+    </p>
 
-    <!-- DEV: DISPLAY ALL RECORDS -->
+       <a href="{{ url_for('index') }}" class="link-button">Go back</a>
+
+    
     <h2>Recorded logs</h2>
+
+    <p>
+        Below you can see the last 25 records in the Access Log.
+    </p>
 
     <table>
         <tr>
@@ -34,6 +47,8 @@
         </tr>
         <!-- Load registered records from DB -->
         {% for record in data %} 
+            <!-- Limit output to last 25 -->
+            {% if loop.index <= 25 %}
             <tr>
                 <!-- Print ID, Token ID, datetime -->
                 <td>{{ record.id }}</td>
@@ -43,9 +58,21 @@
                 <td>{{ record.affiliation }}</td>
                 <td>{{ record.action }}</td>                
             </tr>
+            {% endif %}
         {% endfor %}
     </table>
 
 </div>
+
+<!-- JS for automatic redirect after two minutes -->
+<script>    
+    window.setTimeout(function(){
+
+    // Move to a new location or you can do something else
+    window.location.href = "/";
+
+    }, 120000);
+
+</script>
 
 {% endblock %}
