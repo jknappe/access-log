@@ -14,6 +14,25 @@ I admin mode you can see a list of the 25 most recent records in the database an
 
 ## Coding specs
 
+### Starting the server
+
+To start the server manually, navigate to the app folder and run the following command:
+
+```
+python3 app.py
+```
+
+To run the server on boot-up, create a file called `start_access_log_server` in `/home/pi/.config/autostart` with the following content:
+
+```
+[Desktop Entry]
+Type=Application
+Name=start_access_log_server
+Comment=
+Exec=/usr/bin/python3  /home/pi/projects/flask-tokencheck/app.py
+Name[en_US]=start_access_log_server
+```
+
 ### Recreating the database
 
 The database 'access-log.db' is stored in the app's home folder. If this file is deleted, the entire database is lost. Please export the database to CSV as described above and copy these files to another computer for permanent storage.
