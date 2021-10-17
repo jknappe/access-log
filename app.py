@@ -21,8 +21,8 @@ class access_log_DB(db.Model):
     def __repr__(self):
         return '<id %r>' % self.id
 
-@app.route('/ascend_form', methods=['POST', 'GET'])
-def ascend_form():
+@app.route('/login_form', methods=['POST', 'GET'])
+def login_form():
     error = False
     errorDE = None
     errorEN = None
@@ -40,7 +40,7 @@ def ascend_form():
             try:
                 db.session.add(new_entry)
                 db.session.commit()
-                return redirect('/ascend_success')
+                return redirect('/login_success')
             except:
                 return 'Could not write to data base.'
 
@@ -54,10 +54,10 @@ def ascend_form():
         # read swipes data from the database
         swipes = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()
         # render the index pages with swipes data available
-        return render_template('ascend_form.html', swipes=swipes)
+        return render_template('login_form.html', swipes=swipes)
 
-@app.route('/descend_form', methods=['POST', 'GET'])
-def descend_form():
+@app.route('/logout_form', methods=['POST', 'GET'])
+def logout_form():
     error = False
     errorDE = None
     errorEN = None
@@ -75,7 +75,7 @@ def descend_form():
             try:
                 db.session.add(new_entry)
                 db.session.commit()
-                return redirect('/descend_success')
+                return redirect('/logout_success')
             except:
                 return 'Could not write to data base.'
 
@@ -86,8 +86,8 @@ def descend_form():
             return render_template('/invalid.html', error = error, errorDE = errorDE, errorEN = errorEN)
 
     else:
-        # render descend_form page
-        return render_template('descend_form.html')
+        # render logout_form page
+        return render_template('logout_form.html')
 
 
 @app.route('/admin', methods=['POST', 'GET'])
@@ -130,13 +130,13 @@ def index():
             return render_template('admin.html')
     return render_template('index.html')
 
-@app.route('/ascend_success')
-def ascend_success():
-    return render_template('ascend_success.html')
+@app.route('/login_success')
+def login_success():
+    return render_template('login_success.html')
 
-@app.route('/descend_success')
-def descend_success():
-    return render_template('descend_success.html')
+@app.route('/logout_success')
+def logout_success():
+    return render_template('logout_success.html')
 
 
 

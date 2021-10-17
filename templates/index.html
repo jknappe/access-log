@@ -8,13 +8,13 @@
 <div class="content">
     <div class="container"> 
 
-    <!-- select ascend/descend -->
+    <!-- select login/logout -->
     <table name="choose_action">
         <tr>
-            <td><a href="{{ url_for('ascend_form') }}"><img src="/static/img/arrow_up.png" width="200px" class="arrow-image" /></a> <br /> 
-                <a href="{{ url_for('ascend_form') }}" class="link-button">Eintragen <br /> <i>Log in</i> </a></td>
-            <td><a href="{{ url_for('descend_form') }}"><img src="/static/img/arrow_down.png" width="200px" class="arrow-image" /></a> <br /> 
-                <a href="{{ url_for('descend_form') }}" class="link-button">Austragen <br /> <i>Log out</i> </a></td>                           
+            <td><a href="{{ url_for('login_form') }}"><img src="/static/img/arrow_up.png" width="200px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('login_form') }}" class="link-button">Eintragen <br /> <i>Log in</i> </a></td>
+            <td><a href="{{ url_for('logout_form') }}"><img src="/static/img/arrow_down.png" width="200px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('logout_form') }}" class="link-button">Austragen <br /> <i>Log out</i> </a></td>                           
         </tr>
     </table>
 

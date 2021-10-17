@@ -19,9 +19,9 @@
         Please swipe your dongle to log out.
     </div>
 
-    <form id="descend_form" name="descend_form" action="{{ url_for('descend_form') }}" method="POST" autocomplete="off">
+    <form id="logout_form" name="logout_form" action="{{ url_for('logout_form') }}" method="POST" autocomplete="off">
         
-        <input type="hidden" name="action" value="descend">
+        <input type="hidden" name="action" value="log-out">
         <input type="hidden" name="name" value="NA">
         <input type="hidden" name="affiliation" value="NA">
         <input type="text" name="token" id="token" autofocus="autofocus" onkeypress="javascript:token.focus();" onKeyUp="javascript:token.focus();" OnBlur="javascript:token.focus();" OnChange="javascript:token.focus();" />
