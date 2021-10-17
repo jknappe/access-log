@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 import flask_excel as excel
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///access-log.db'
@@ -136,8 +137,9 @@ def descend_success():
 
 
 
-
-
+@app.route('/shutdown')
+def shutdown():
+    os.system("sudo shutdown -h now")
 
 
 if __name__ == "__main__":
