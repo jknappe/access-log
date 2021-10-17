@@ -1,23 +1,21 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <title>Eintragung erfolgreich / Log in successful</title>
+    <title>Eintragung erfolgreich · Log in successful</title>
 {% endblock %}
 
 {% block body %}
 
     <div class="content">
-
-        <h1>Eintragung erfolgreich <br />Log in successful</h1>
+        
+        <h1>Eintragung erfolgreich <span>· Log in successful</span></h1>
         <hr />
 
-        <div class="success_deutsch">
+        <div class="deutsch">
             Der Code für den Schlüsselkasten lautet:
         </div>
-        
-        <br />
 
-        <div class="success_english">
+        <div class="english">
             The code for the key box is:
         </div>
         
@@ -26,9 +24,9 @@
         <div class="code">
             2 4 0 7
         </div>  
-
+        
         <br />
-        <hr />
+
         <!-- retuen home button -->
         <a href="{{ url_for('index') }}" class="home-button">Zurück<br /><i>Back</i> </a>  
 

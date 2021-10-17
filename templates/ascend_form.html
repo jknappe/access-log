@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Eintragen / Log In</title>
+<title>Eintragen · Log In</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
     
-    <h1>Eintragen<br /> Log in</h1>   
+    <h1>Eintragen <span>· Log in</span></h1>   
     
     <hr />
 
@@ -19,21 +19,20 @@
         Please register your visit to the research green roof.
     </div>
 
-    <br />
     <hr />
 
     <form id="ascend_form" name="ascend_form" action="{{ url_for('ascend_form') }}" method="POST">
 
         <div class="group">
             <label for="name" class="deutsch">Name</label>
-            <label for="name" class="english">Name</label><br />
+            <label for="name" class="english">· Name</label><br />
             <input type="text" name="name" id="name" /> <br />
             <br />
         </div>
 
         <div class="group">
             <label for="affiliation" class="deutsch">Department/Firma</label>
-            <label for="affiliation" class="english">Affiliation</label><br />
+            <label for="affiliation" class="english">· Affiliation</label><br />
             <input type="text" name="affiliation" id="affiliation" /> <br />   
             <br />
         </div>
@@ -51,7 +50,6 @@
 
     </form>
     
-    <hr />
 
     <!-- retuen home button -->
     <a href="{{ url_for('index') }}" class="home-button" id="home-button">Abbrechen<br /><i>Cancel</i> </a>

@@ -1,28 +1,31 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Austragung erfolgreich / Log off successful</title>
+<title>Austragung erfolgreich · Log off successful</title>
 {% endblock %}
 
 {% block body %}
 
     <div class="content">
 
-        <h1>Austragung erfolgreich <br />Log off successful</h1>
+        <h1>Austragung erfolgreich <span>· Log off successful</span></h1>
         <hr />
 
-        <div class="success_deutsch">
-            Danke! <br />Bitte legen Sie den Dongle wieder zurück.
+        <div class="deutsch">
+            Danke! Bitte legen Sie den Dongle wieder zurück.
         </div>
-        
-        <br />
 
-        <div class="success_english">
-            Thank you! <br />Please return the dongle.
-        </div>  
+        <div class="english">
+            Thank you! Please return the dongle.
+        </div> 
 
-        <br />
         <hr />
+
+        <br />
+        <br />
+        <br />
+        <br />
+
         <!-- retuen home button -->
         <a href="{{ url_for('index') }}" class="home-button">Zurück<br /><i>Back</i> </a>
 

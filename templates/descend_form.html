@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Austragen / Log Out</title>
+<title>Austragen · Log Out</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
 
-    <h1>Austragen<br /> Log out</h1>   
+    <h1>Austragen <span>· Log out</span></h1>   
     
     <hr />
 
@@ -29,6 +29,11 @@
     </form>    
     
     <hr />
+
+    <br />
+    <br />
+    <br />
+    <br />
 
     <!-- retuen home button -->
     <a href="{{ url_for('index') }}" class="home-button" id="home-button">Abbrechen<br /><i>Cancel</i> </a>
