@@ -95,6 +95,13 @@ def admin():
     data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   
     return render_template('admin.html', data=data)
 
+    
+
+@app.route('/show_data', methods=['POST', 'GET'])
+def show_data():
+    data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   
+    return render_template('show_data.html', data=data)
+
 
 
 @app.route('/download', methods=['GET'])

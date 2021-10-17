@@ -113,6 +113,12 @@ table[name=admin]{
   font-size: 0.7em;
 }
 
+.admin-menu{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Images */
 /* ------ */
 .arrow-image:hover{

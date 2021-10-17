@@ -7,72 +7,21 @@
 {% block body %}
 
 <div class="content">
-    <div class="container"> 
 
-    <h1>Admin Mode</h1>
-
-    <h2>Eintrge exortieren <br />Export records</h2>
-
-    <div class="deutsch">
-        Hier klicken, um Daten des Access Log lokal im 'Download'-Ordner als CSV-Datei zu speichern.
-    </div>
-    <div class="english">
-        Click the button below to download all Access Log records in CSV format. The data will be saved in the download folder.
-    </div>
-
-    <br />
-    
-       <a href="{{ url_for('download_data') }}" class="next-button">Daten exportieren<br /><i>Export data</i> </a>
-
-    <hr />
-    <!-- retuen home button -->
-    <a href="{{ url_for('index') }}" class="home-button">Zurück<br /><i>Back</i> </a>
+    <h1>Admin Modus <span>· Admin Mode</span></h1>
     <hr />
 
-    <hr />
-    <!-- shutdown pi button -->
-    <a href="{{ url_for('shutdown') }}" class="home-button">System herunterfahren<br /><i>Shutdown System</i> </a>
-    <hr />
-    
-    <h2>Letzte Einträge <br />Recent logs</h2>
-
-    <div class="deutsch">
-        Dies sind die letzten 25 Einträge im Access Log.
-    </div>
-    <div class="english">
-        these are the 25 most recent records in the Access Log.
-    </div>
-
-    <br />
-
-    <table name="admin">
+    <table class="admin-menu">
         <tr>
-            <th>ID</th>
-            <th>Timestamp</th>
-            <th>Token</th>
-            <th>Name</th>
-            <th>Affiliation</th>
-            <th>Action</th>
-            
+            <td><a href="{{ url_for('show_data') }}" class="next-button">Daten anzeigen<br /><i>Show data</i> </a></td>
+            <td><a href="{{ url_for('download_data') }}" class="next-button">Daten exportieren<br /><i>Export data</i> </a></td>
         </tr>
-        <!-- Load registered records from DB -->
-        {% for record in data %} 
-            <!-- Limit output to last 25 -->
-            {% if loop.index <= 25 %}
-            <tr>
-                <!-- Print ID, Token ID, datetime -->
-                <td>{{ record.id }}</td>
-                <td>{{ record.datetime.replace(microsecond=0) }}</td>
-                <td>{{ record.token }}</td>
-                <td>{{ record.name}}</td>
-                <td>{{ record.affiliation }}</td>
-                <td>{{ record.action }}</td>                
-            </tr>
-            {% endif %}
-        {% endfor %}
+        <tr>
+            <td><a href="{{ url_for('index') }}" class="home-button">Zurück<br /><i>Back</i> </a></td>
+            <td><a href="{{ url_for('shutdown') }}" class="home-button">System herunterfahren<br /><i>Shutdown System</i> </a></td>
+        </tr>
     </table>
 
-    </div>
 </div>
 
 <!-- JS for automatic redirect after two minutes -->
