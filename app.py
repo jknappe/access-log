@@ -28,12 +28,16 @@ class access_log_DB(db.Model):
 # Set up rendered pages and functions
 #=====================================================  
 
-@app.route('/')
+@app.route('/', methods=['POST', 'GET'])
 def index():
+    valid_input = ['admin']
+    
     if request.method == 'POST':
-        token = request.form['token']
-        if token == 'admin':
+        user_input = request.form['token']
+        if user_input in valid_input:
             return render_template('admin.html')
+        else:
+            return render_template('index.html')
     return render_template('index.html')
 
 @app.route('/login_form', methods=['POST', 'GET'])
