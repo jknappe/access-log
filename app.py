@@ -1,11 +1,20 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+from flask_mail import Mail, Message
 
 import flask_excel as excel
 import os
 
 app = Flask(__name__)
+
+app.config['MAIL_SERVER']='smtp.office365.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USERNAME'] = 'fgd-accesslog@outlook.com'
+app.config['MAIL_PASSWORD'] = '***'
+app.config['MAIL_USE_TLS'] = True
+mail = Mail(app)
+
 
 # Set up SQL database
 #=====================================================
@@ -143,6 +152,13 @@ def download_data():
 @app.route('/shutdown')
 def shutdown():
     os.system("sudo shutdown -h now")
+
+@app.route("/email")
+def email():
+   msg = Message('Hello', sender = 'fgd-accesslog@outlook.com', recipients = ['jan.knappe@gmail.com'])
+   msg.body = "This is the email body"
+   mail.send(msg)
+   return "Sent"
 
 # Debugger
 #=====================================================  
