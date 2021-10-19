@@ -155,8 +155,10 @@ def shutdown():
 
 @app.route("/email")
 def email():
-   msg = Message('Hello', sender = 'fgd-accesslog@outlook.com', recipients = ['jan.knappe@gmail.com'])
-   msg.body = "This is the email body"
+   msg = Message('UFZ FGD: Access Log', sender = 'fgd-accesslog@outlook.com', recipients = ['jan.knappe@gmail.com'])
+   msg.body = "Please find attached the most recent copy of the UFZ Research Green Roof Access Log database.\n\nNOTE: This email account is unsupervised. Do not reply."
+   with app.open_resource("../Downloads/access_log_export.csv") as fp:
+        msg.attach(datetime.now().strftime("%Y%m%d-%H%M") + "_accesslog.csv", "text/csv", fp.read())
    mail.send(msg)
    return "Sent"
 
