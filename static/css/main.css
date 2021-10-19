@@ -6,7 +6,7 @@
 /* ------------- */
 html, body, .container {
   height: 400px;
-  width: 800px;
+  width: 790px;
 }
 
 html{ 
@@ -159,6 +159,7 @@ table[name=admin]{
   float: right;
   margin-right: 20px;
 }
+
 .home-button:first-line {
   font-style: normal;
   color: #ffffff;
