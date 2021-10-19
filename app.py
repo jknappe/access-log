@@ -6,6 +6,10 @@ import flask_excel as excel
 import os
 
 app = Flask(__name__)
+
+# Set up SQL database
+#=====================================================
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///access-log.db'
 app.secret_key = 'fgd2L"))+=23F4Q8z\n\xec]/'
 db = SQLAlchemy(app)
@@ -20,6 +24,17 @@ class access_log_DB(db.Model):
 
     def __repr__(self):
         return '<id %r>' % self.id
+
+# Set up rendered pages and functions
+#=====================================================  
+
+@app.route('/')
+def index():
+    if request.method == 'POST':
+        token = request.form['token']
+        if token == 'admin':
+            return render_template('admin.html')
+    return render_template('index.html')
 
 @app.route('/login_form', methods=['POST', 'GET'])
 def login_form():
@@ -89,20 +104,23 @@ def logout_form():
         # render logout_form page
         return render_template('logout_form.html')
 
+@app.route('/login_success')
+def login_success():
+    return render_template('login_success.html')
+
+@app.route('/logout_success')
+def logout_success():
+    return render_template('logout_success.html')
 
 @app.route('/admin', methods=['POST', 'GET'])
 def admin():
     data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   
-    return render_template('admin.html', data=data)
-
-    
+    return render_template('admin.html', data=data)    
 
 @app.route('/show_data', methods=['POST', 'GET'])
 def show_data():
     data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   
     return render_template('show_data.html', data=data)
-
-
 
 @app.route('/download', methods=['GET'])
 def download_data():
@@ -118,36 +136,12 @@ def download_data():
     d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
 
-
-
-
-    
-@app.route('/')
-def index():
-    if request.method == 'POST':
-        token = request.form['token']
-        if token == 'admin':
-            return render_template('admin.html')
-    return render_template('index.html')
-
-@app.route('/login_success')
-def login_success():
-    return render_template('login_success.html')
-
-@app.route('/logout_success')
-def logout_success():
-    return render_template('logout_success.html')
-
-
-
-
-
-
-
 @app.route('/shutdown')
 def shutdown():
     os.system("sudo shutdown -h now")
 
+# Debugger
+#=====================================================  
 
 if __name__ == "__main__":
      app.run(debug=True)
