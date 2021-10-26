@@ -120,6 +120,11 @@ table[name=admin]{
 
 /* Images */
 /* ------ */
+.arrow-image{
+  position: relative;
+  top: 20px;
+}
+
 .arrow-image:hover{
   background-color: white;
   border-radius: 56px;
