@@ -148,8 +148,8 @@ def download_data():
     now = time.strftime("%Y%m%d-%H%M%S")
     filename = now + "_fgd_accesslog" + "." + extension_type
     d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
-    src_dir = "../Downloads/"
-    dst_dir = "../Downloads/archived/"
+    src_dir = "/home/pi/Downloads/"
+    dst_dir = "/home/pi/Downloads/archived/"
     try:
         os.makedirs(dst_dir);
     except:
@@ -178,7 +178,7 @@ def email_form():
 def email_success():
     # TODO check for WiFi
     email_address = request.form['email_address']
-    src_dir = "../Downloads/"
+    src_dir = "/home/pi/Downloads/"
     attachments_all = glob.glob(src_dir + "/*_fgd_accesslog.csv")
     attachments_first = attachments_all[0] 
     msg = Message(subject = 'UFZ FGD: Access Log', sender = 'fgd-accesslog@outlook.com', recipients = [email_address])
