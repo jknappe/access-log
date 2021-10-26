@@ -4,7 +4,7 @@ from datetime import datetime
 from flask_mail import Mail, Message
 
 import flask_excel as excel
-import os
+import os, shutil, glob, time
 
 app = Flask(__name__)
 
@@ -145,8 +145,18 @@ def download_data():
     action = access_log_DB.query.with_entities(access_log_DB.action).order_by(access_log_DB.datetime.desc()).all()
     excel.init_excel(app)
     extension_type = "csv"
-    filename = "access_log_export" + "." + extension_type
+    now = time.strftime("%Y%m%d-%H%M%S")
+    filename = now + "_fgd_accesslog" + "." + extension_type
     d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
+    src_dir = "/home/jan/Downloads"
+    dst_dir = "/home/jan/Downloads/archived"
+    try:
+        os.makedirs(dst_dir);
+    except:
+        print("Folder already exist.");    
+    for csv_file in glob.glob(src_dir + "/*.csv"):
+        shutil.copy2(csv_file, dst_dir);
+        os.remove(csv_file);
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
 
 @app.route('/reboot')
@@ -168,11 +178,15 @@ def email_form():
 def email_success():
     # TODO check for WiFi
     email_address = request.form['email_address']
+    src_dir = "/home/jan/Downloads"
+    attachments_all = glob.glob(src_dir + "/*.csv")
+    attachments_first = attachments_all[0] 
     msg = Message(subject = 'UFZ FGD: Access Log', sender = 'fgd-accesslog@outlook.com', recipients = [email_address])
     msg.body = "Please find attached the most recent copy of the UFZ Research Green Roof Access Log database.\n\nNOTE: This email account is unsupervised. Do not reply."
     # TODO send the latest copy
-    with app.open_resource("../Downloads/access_log_export.csv") as fp:
-        msg.attach(datetime.now().strftime("%Y%m%d-%H%M") + "_accesslog.csv", "text/csv", fp.read())
+    with open(attachments_first, "rb") as fp:
+        #msg.attach(datetime.now().strftime("%Y%m%d-%H%M%S") + "_fgd_accesslog.csv", "text/csv", fp.read())
+        msg.attach(os.path.basename(attachments_first), "text/csv", fp.read())
     mail.send(msg)
     return render_template('email_success.html', email_address=email_address)  
 
