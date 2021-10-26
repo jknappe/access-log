@@ -122,7 +122,7 @@ table[name=admin]{
 /* ------ */
 .arrow-image{
   position: relative;
-  top: 20px;
+  top: 10px;
 }
 
 .arrow-image:hover{
