@@ -90,6 +90,16 @@ h1 span {
   color: #333;
 }
 
+h2 { 
+  font-size: 1.2em; 
+  color: #000;
+  text-align: center;
+}
+h2 span { 
+  font-style: italic;
+  color: #333;
+}
+
 /* Tables */
 /* ------ */
 table[name=choose_action]{

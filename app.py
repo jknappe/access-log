@@ -149,6 +149,10 @@ def download_data():
     d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
 
+@app.route('/reboot')
+def reboot():
+    os.system("sudo shutdown -r now")
+    
 @app.route('/shutdown')
 def shutdown():
     os.system("sudo shutdown -h now")
