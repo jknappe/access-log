@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #9CC666;}
+   </style>
+    <title>Email gesendet · Email sent</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        
+        <h1>Email gesendet <span>· Email sent</span></h1>
+        <hr />
+
+        <div class="deutsch">
+            Die Email wurde an {% if email_address %} {{ email_address }} {% endif %} versendet.
+        </div>
+
+        <div class="english">
+            The email has been sent to {% if email_address %} {{ email_address }} {% endif %}.
+        </div>
+        
+               <!-- retuen home button -->
+        <a href="{{ url_for('admin') }}" class="home-button">Zurück<br /><i>Back</i> </a>  
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/admin";
+
+        }, 10000);
+
+    </script>
+
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Email senden · Send email</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    
+    <h1>Daten als Email <span>· Send data as email</span></h1>   
+    
+    <hr />
+
+    <div class="deutsch">
+        Bitte geben sie die Ziel-Emailadresse (nur UFZ Domain) ein und klicken sie dann 'Senden'.
+    </div>
+
+    <div class="english">
+        Please enter the target email address (UFZ domain only) and click send.
+    </div>
+
+    <hr />
+
+    <form id="email_form" name="email_form" action="email_success" method="POST">
+
+        <div>
+            <label for="name" class="deutsch">Email Adresse</label>
+            <label for="name" class="english">· Email address</label><br />
+            <!-- <input type="email" id="email_address" pattern=".+@ufz\.de" size="50" required> -->
+            <input type="email" name="email_address" id="email_address" size="50" placeholder="username@ufz.de"  autofocus="autofocus" required>
+            <br />
+            <br />
+        </div>        
+
+        <div>
+            <!-- <input type="submit" value="Send Request"> -->
+            <button id="send_email" type="submit" class="next-button">Senden<br /><i>Send</i></button>
+            <!-- <button id="btnSubmit" type="submit" class="next-button">Senden<br /><i>Send</i></button> -->
+        </div>  
+
+    </form>    
+
+    <!-- return back button -->
+    <a href="{{ url_for('admin') }}" class="home-button" id="home-button">Zurück<br /><i>Back</i> </a>
+
+</div>
+
+    <!-- JS for automatic redirect after two minutes -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 120000);
+
+    </script>
+
+{% endblock %}

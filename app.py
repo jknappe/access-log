@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.config['MAIL_SERVER']='smtp.office365.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USERNAME'] = 'fgd-accesslog@outlook.com'
-app.config['MAIL_PASSWORD'] = '***'
+app.config['MAIL_PASSWORD'] = os.environ['email_pw']
 app.config['MAIL_USE_TLS'] = True
 mail = Mail(app)
 
@@ -153,14 +153,24 @@ def download_data():
 def shutdown():
     os.system("sudo shutdown -h now")
 
-@app.route("/email")
-def email():
-   msg = Message('UFZ FGD: Access Log', sender = 'fgd-accesslog@outlook.com', recipients = ['jan.knappe@gmail.com'])
-   msg.body = "Please find attached the most recent copy of the UFZ Research Green Roof Access Log database.\n\nNOTE: This email account is unsupervised. Do not reply."
-   with app.open_resource("../Downloads/access_log_export.csv") as fp:
+@app.route('/email_form', methods=['POST', 'GET'])
+def email_form():  
+    if request.method == 'POST':
+        return redirect(url_for('email_success'))
+    else:     
+        return render_template('email_form.html')
+        
+@app.route('/email_success', methods=['POST', 'GET'])
+def email_success():
+    # TODO check for WiFi
+    email_address = request.form['email_address']
+    msg = Message(subject = 'UFZ FGD: Access Log', sender = 'fgd-accesslog@outlook.com', recipients = [email_address])
+    msg.body = "Please find attached the most recent copy of the UFZ Research Green Roof Access Log database.\n\nNOTE: This email account is unsupervised. Do not reply."
+    # TODO send the latest copy
+    with app.open_resource("../Downloads/access_log_export.csv") as fp:
         msg.attach(datetime.now().strftime("%Y%m%d-%H%M") + "_accesslog.csv", "text/csv", fp.read())
-   mail.send(msg)
-   return "Sent"
+    mail.send(msg)
+    return render_template('email_success.html', email_address=email_address)  
 
 # Debugger
 #=====================================================  
