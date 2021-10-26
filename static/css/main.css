@@ -121,8 +121,10 @@ table[name=admin]{
 /* Images */
 /* ------ */
 .arrow-image{
+  display: inline-block;
+  margin: 25px 10px;
   position: relative;
-  top: 10px;
+  top: 40px;
 }
 
 .arrow-image:hover{
