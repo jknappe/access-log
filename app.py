@@ -148,13 +148,13 @@ def download_data():
     now = time.strftime("%Y%m%d-%H%M%S")
     filename = now + "_fgd_accesslog" + "." + extension_type
     d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
-    src_dir = "../Downloads"
-    dst_dir = "../Downloads/archived"
+    src_dir = "../Downloads/"
+    dst_dir = "../Downloads/archived/"
     try:
         os.makedirs(dst_dir);
     except:
         print("Folder already exist.");    
-    for csv_file in glob.glob(src_dir + "/*.csv"):
+    for csv_file in glob.glob(src_dir + "/*_fgd_accesslog.csv"):
         shutil.copy2(csv_file, dst_dir);
         os.remove(csv_file);
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
@@ -178,14 +178,13 @@ def email_form():
 def email_success():
     # TODO check for WiFi
     email_address = request.form['email_address']
-    src_dir = "../Downloads"
-    attachments_all = glob.glob(src_dir + "/*.csv")
+    src_dir = "../Downloads/"
+    attachments_all = glob.glob(src_dir + "/*_fgd_accesslog.csv")
     attachments_first = attachments_all[0] 
     msg = Message(subject = 'UFZ FGD: Access Log', sender = 'fgd-accesslog@outlook.com', recipients = [email_address])
     msg.body = "Please find attached the most recent copy of the UFZ Research Green Roof Access Log database.\n\nNOTE: This email account is unsupervised. Do not reply."
     # TODO send the latest copy
     with open(attachments_first, "rb") as fp:
-        #msg.attach(datetime.now().strftime("%Y%m%d-%H%M%S") + "_fgd_accesslog.csv", "text/csv", fp.read())
         msg.attach(os.path.basename(attachments_first), "text/csv", fp.read())
     mail.send(msg)
     return render_template('email_success.html', email_address=email_address)  
