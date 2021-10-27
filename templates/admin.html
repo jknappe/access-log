@@ -12,6 +12,15 @@
     <hr />
 
     <h2>Daten-Optionen <span>· Data options</span></h2>
+        <hr />
+
+        <div class="deutsch">
+            Die Email wurde an {% if email_address %} {{ email_address }} {% endif %} versendet.
+        </div>
+
+        <div class="english">
+            The email has been sent to {% if email_address %} {{ email_address }} {% endif %}.
+        </div>
     
     <table class="admin-menu">
         <tr>

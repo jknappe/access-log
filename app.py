@@ -39,15 +39,16 @@ class access_log_DB(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    valid_input = ['admin']
+    admin_input = ['admin']
     
     if request.method == 'POST':
         user_input = request.form['token']
-        if user_input in valid_input:
-            return render_template('admin.html')
+        if user_input in admin_input:
+            return render_template('admin_check.html')
         else:
             return render_template('index.html')
-    return render_template('index.html')
+    else:
+        return render_template('index.html')
 
 @app.route('/login_form', methods=['POST', 'GET'])
 def login_form():
@@ -125,10 +126,24 @@ def login_success():
 def logout_success():
     return render_template('logout_success.html')
 
+@app.route('/admin_check', methods=['POST', 'GET'])
+def admin_check():
+    admin_tokens = ['admin', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087']
+
+    if request.method == 'POST':
+        token = request.form['token']
+    
+        if token in admin_tokens:
+            return render_template('admin.html') 
+        else:
+            return render_template('admin_check.html')  
+            
+    else:
+        return render_template('admin_check.html')  
+
 @app.route('/admin', methods=['POST', 'GET'])
 def admin():
-    data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   
-    return render_template('admin.html', data=data)    
+    return render_template('admin.html')    
 
 @app.route('/show_data', methods=['POST', 'GET'])
 def show_data():
