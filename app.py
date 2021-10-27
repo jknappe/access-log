@@ -39,12 +39,35 @@ class access_log_DB(db.Model):
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    admin_input = ['admin']
-    
+    admin_tokens = ['admin', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087', '0015466677']
+
     if request.method == 'POST':
-        user_input = request.form['token']
-        if user_input in admin_input:
-            return render_template('admin_check.html')
+        scanned_token = request.form['token']
+
+        if scanned_token in admin_tokens:
+            # if scanned_token == 'admin':
+            #     name = 'Admin'
+            # elif scanned_token == '0015465087':
+            #     name = 'Jan'
+            # elif scanned_token == '0004498655':
+            #     name = 'Lucie'
+            # elif scanned_token == '0015465203':
+            #     name = 'Katy'
+            # elif scanned_token == '0004656070':
+            #     name = 'Max'
+            # elif scanned_token == '0003949645':
+            #     name = 'Ralf'
+            # elif scanned_token == '0004484801':
+            #     name = 'Niels'
+            # elif scanned_token == '0015466677':
+            #     name = 'Christian'
+            # elif scanned_token == '0004724076':
+            #     name = 'Admin 8'
+            # elif scanned_token == '0004499470':
+            #     name = 'Admin 9'
+            # elif scanned_token == '0015465255':
+            #     name = 'Admin 10'            
+            return render_template('admin_index.html')
         else:
             return render_template('index.html')
     else:
@@ -55,7 +78,7 @@ def login_form():
     error = False
     errorDE = None
     errorEN = None
-    valid_tokens = ['t', '0001101747' , '0001964054', '0014488389', '0014405751', '0004033874', '0014580266', '0001951950', '0007000492', '0014502443', '0014552070', '0011248286', '0011248301', '0011250890', '0003912831', '0003858707', '0015466677', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087']
+    valid_tokens = ['t', '0001101747' , '0001964054', '0014488389', '0014405751', '0004033874', '0014580266', '0001951950', '0007000492', '0014502443', '0014552070', '0011248286', '0011248301', '0011250890', '0003912831', '0003858707', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087', '0015466677']
 
     if request.method == 'POST':
         token = request.form['token']
@@ -126,20 +149,9 @@ def login_success():
 def logout_success():
     return render_template('logout_success.html')
 
-@app.route('/admin_check', methods=['POST', 'GET'])
-def admin_check():
-    admin_tokens = ['admin', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087']
-
-    if request.method == 'POST':
-        token = request.form['token']
-    
-        if token in admin_tokens:
-            return render_template('admin.html') 
-        else:
-            return render_template('admin_check.html')  
-            
-    else:
-        return render_template('admin_check.html')  
+@app.route('/admin_index')
+def admin_index():
+    return render_template('admin_index.html')  
 
 @app.route('/admin', methods=['POST', 'GET'])
 def admin():

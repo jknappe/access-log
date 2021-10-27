@@ -25,6 +25,17 @@ html{
   justify-content: center;
   }
 
+  .top_stripe {
+    color: white;
+    background: repeating-linear-gradient(
+      45deg,
+      #606dbc,
+      #606dbc 10px,
+      #465298 10px,
+      #465298 20px
+    );
+  }
+
   /* Body Text */
   /* --------- */
 
