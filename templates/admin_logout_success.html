@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #9CC666;}
+   </style>
+<title>Austragung erfolgreich · Log off successful</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+
+        <h1>Austragung erfolgreich <span>· Log off successful</span></h1>
+        <hr />
+
+        <div class="deutsch">
+            Danke! Bitte legen Sie den Dongle wieder zurück.
+        </div>
+
+        <div class="english">
+            Thank you! Please return the dongle.
+        </div> 
+
+        <hr />
+
+        <br />
+        <br />
+        <br />
+        <br />
+
+        <!-- retuen home button -->
+        <a href="{{ url_for('index') }}" class="home-button">Zurück<br /><i>Back</i> </a>
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 3000);
+
+    </script>
+
+{% endblock %}

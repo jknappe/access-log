@@ -153,6 +153,126 @@ def logout_success():
 def admin_index():
     return render_template('admin_index.html')  
 
+@app.route('/admin_login_form', methods=['POST', 'GET'])
+def admin_login_form():
+    error = False
+    errorDE = None
+    errorEN = None
+    admin_tokens = ['a', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087', '0015466677']
+
+    if request.method == 'POST':
+        token = request.form['token']
+        action = request.form['action']
+
+        name = 'NA'
+        if token == 'a':
+            name = 'Test-Admin'
+        elif token == '0015465087':
+            name = 'Jan Knappe'
+        elif token == '0004498655':
+            name = 'Lucie Moeller'
+        elif token == '0015465203':
+            name = 'Katy Bernhard'
+        elif token == '0004656070':
+            name = 'Max Ueberham'
+        elif token == '0003949645':
+            name = 'Ralf Trabitzsch'
+        elif token == '0004484801':
+            name = 'Niels Wollschläger'
+        elif token == '0015466677':
+            name = 'Christian Hecht'
+        elif token == '0004724076':
+            name = 'Admin 8'
+        elif token == '0004499470':
+            name = 'Admin 9'
+        elif token == '0015465255':
+            name = 'Admin 10'          
+
+        affiliation = 'NA'
+        if token == 'a':
+            affiliation = 'Test-Admin'
+        elif token == '0015465087':
+            affiliation = 'UFZ UBZ'
+        elif token == '0004498655':
+            affiliation = 'UFZ UBZ'
+        elif token == '0015465203':
+            affiliation = 'UFZ UBZ'
+        elif token == '0004656070':
+            affiliation = 'UFZ UBZ'
+        elif token == '0003949645':
+            affiliation = 'UFZ ENVINF'
+        elif token == '0004484801':
+            affiliation = 'UFZ SUSOZ'
+        elif token == '0015466677':
+            affiliation = 'UFZ NSF'
+        elif token == '0004724076':
+            affiliation = 'Admin 8'
+        elif token == '0004499470':
+            affiliation = 'Admin 9'
+        elif token == '0015465255':
+            affiliation = 'Admin 10'    
+    
+        if token in admin_tokens:
+            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+
+            try:
+                db.session.add(new_entry)
+                db.session.commit()
+                return redirect('/admin_login_success')
+            except:
+                return 'Could not write to data base.'
+
+        else:
+            error = True
+            errorDE = 'Dieser Dongle kann nicht gelesen werden. Bitte einen der gültigen Dongles scannen.'
+            errorEN = 'This dongle cannot be read, please scan one of provided dongles.'
+            return render_template('/invalid.html', error = error, errorDE = errorDE, errorEN = errorEN)
+
+    else:
+        return render_template('admin_login_form.html')
+      
+
+@app.route('/admin_logout_form', methods=['POST', 'GET'])
+def admin_logout_form():
+    error = False
+    errorDE = None
+    errorEN = None
+    admin_tokens = ['a', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087', '0015466677']
+
+    if request.method == 'POST':
+        token = request.form['token']
+        action = request.form['action']
+        name = request.form['name']
+        affiliation = request.form['affiliation']
+    
+        if token in admin_tokens:
+            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+
+            try:
+                db.session.add(new_entry)
+                db.session.commit()
+                return redirect('/admin_logout_success')
+            except:
+                return 'Could not write to data base.'
+
+        else:
+            error = True
+            errorDE = 'Dieser Dongle kann nicht gelesen werden. Bitte einen der gültigen Dongles scannen.'
+            errorEN = 'This dongle cannot be read, please scan one of provided dongles.'
+            return render_template('/invalid.html', error = error, errorDE = errorDE, errorEN = errorEN)
+
+    else:
+        # render logout_form page
+        return render_template('admin_logout_form.html')
+
+@app.route('/admin_login_success', methods=['POST', 'GET'])
+def admin_login_success():
+    return render_template('admin_login_success.html')
+
+@app.route('/admin_logout_success', methods=['POST', 'GET'])
+def admin_logout_success():
+    return render_template('admin_logout_success.html')
+
 @app.route('/admin', methods=['POST', 'GET'])
 def admin():
     return render_template('admin.html')    

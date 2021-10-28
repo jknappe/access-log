@@ -1,34 +1,30 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
 <style>
     body {background-color: #00937F;}
    </style>
+   
 <title>Access Log</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
-    <h1 class="top_stripe">Colored Stripes</h1>
-    <div class="container"> 
+    <h2 class="top_stripe">Admin Modus <span>· Admin Mode</span></h2>
+    <div> 
 
     <!-- select login/logout -->
     <table name="choose_action">
         <tr>
-            <td><a href="{{ url_for('login_form') }}"><img src="/static/img/arrow_up.png" width="200px" class="arrow-image" /></a> <br /> 
-                <a href="{{ url_for('login_form') }}" class="link-button">Eintragen <br /> <i>Log in</i> </a></td>
-            <td><a href="{{ url_for('logout_form') }}"><img src="/static/img/arrow_down.png" width="200px" class="arrow-image" /></a> <br /> 
-                <a href="{{ url_for('logout_form') }}" class="link-button">Austragen <br /> <i>Log out</i> </a></td>                           
+            <td><a href="{{ url_for('admin_login_form') }}"><img src="/static/img/arrow_up.png" width="200px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('admin_login_form') }}" class="link-button">Eintragen <br /> <i>Log in</i> </a></td>
+            <td><a href="{{ url_for('admin_logout_form') }}"><img src="/static/img/arrow_down.png" width="200px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('admin_logout_form') }}" class="link-button">Austragen <br /> <i>Log out</i> </a></td>  
+            <td><a href="{{ url_for('admin') }}"><img src="/static/img/admin_button.png" width="200px" class="arrow-image" /></a> <br /> 
+                <a href="{{ url_for('admin') }}" class="home-button">Admin Modus <br /> <i>Admin mode</i> </a></td>                           
         </tr>
     </table>
-
-    <!-- hidden inut filed for access to admin page; type 'admin' + ENTER to access --> 
-
-    <form id="admin_access" name="admin_access" action="{{ url_for('index') }}" method="POST" autocomplete="off">
-        
-        <input type="text" name="token" id="token" autofocus="autofocus" onkeypress="javascript:token.focus();" onKeyUp="javascript:token.focus();" OnBlur="javascript:token.focus();" OnChange="javascript:token.focus();" />
-    
-    </form>  
     
     </div>
 </div>

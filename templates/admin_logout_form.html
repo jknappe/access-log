@@ -1,10 +1,15 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Austragen · Log Out</title>
+<style>
+    body {background-color: #00937F;}
+   </style>
+   
+<title>Access Log: Admin Mode</title>
 {% endblock %}
 
 {% block body %}
+
 <div class="content">
 
     <h1>Austragen <span>· Log out</span></h1>   
@@ -19,7 +24,7 @@
         Please swipe your dongle to log out.
     </div>
 
-    <form id="logout_form" name="logout_form" action="{{ url_for('logout_form') }}" method="POST" autocomplete="off">
+    <form id="admin_logout_form" name="admin_logout_form" action="{{ url_for('admin_logout_form') }}" method="POST" autocomplete="off">
         
         <input type="hidden" name="action" value="log-out">
         <input type="hidden" name="name" value="NA">
@@ -35,7 +40,7 @@
     <br />
     <br />
 
-    <!-- retuen home button -->
+    <!-- return home button -->
     <a href="{{ url_for('index') }}" class="home-button" id="home-button">Abbrechen<br /><i>Cancel</i> </a>
 
 </div>
@@ -49,4 +54,5 @@
     }, 10000);
 
 </script>
+
 {% endblock %}
