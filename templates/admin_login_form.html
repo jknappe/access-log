@@ -13,28 +13,106 @@
 
 <div class="content">
 
-    <h1>Eintragen <span>· Log in</span></h1>   
-    
-    <hr />
+    <form id="login_form" name="login_form" action="{{ url_for('admin_login_form') }}" method="POST" autocomplete="off">
 
-    <div class="deutsch">
-        Bitte registrieren Sie sich für Ihren Besuch des Forschungsgründachs.
-    </div>
+        <div class="group"> 
+            
+            <hr />    
 
-    <div class="english">
-        Please register your visit to the research green roof.
-    </div>
-
-    <hr />
-
-    <form id="admin_login_form" name="admin_login_form" action="{{ url_for('admin_login_form') }}" method="POST" autocomplete="off">
+            <div class="deutsch">
+                Welche Arbeiten werden durchgeführt? Bitte zutreffende Felder auswählen! 
+            </div>
         
-        <input type="hidden" name="action" value="log-in">
-        <input type="hidden" name="name" value="NA">
-        <input type="hidden" name="affiliation" value="NA">
-        <input type="text" name="token" id="token" autofocus="autofocus" onkeypress="javascript:token.focus();" onKeyUp="javascript:token.focus();" OnBlur="javascript:token.focus();" OnChange="javascript:token.focus();" />
+            <div class="english">
+                Please specify the type of work undertaken by selecting the appropriate fields.
+            </div>
+
+            <hr />
+
+            <table>
+                <tr>
+                    <td>
+                        <input type="checkbox" name="work_inspection" value="1" id='work_inspection' class='checkbox-btn' />
+                        <label for='work_inspection'>Kontrolle<br /><i>Inspection</label>     
+                    </td>
+                    <td>
+                        <input type="checkbox" name="work_maintenance" value="1" id='work_maintenance' class='checkbox-btn' />
+                        <label for='work_maintenance'>Wartung<br /><i>Maintenance</i></label>  
+                    </td>
+                    <td>
+                        <input type="checkbox" name="work_equipment" value="1" id='work_equipment' class='checkbox-btn' />
+                        <label for='work_equipment'>Geräteaufbau<br /><i>Equipment</i></label>  
+                    </td><td>
+                        <input type="checkbox" name="work_sampling" value="1" id='work_sampling' class='checkbox-btn' />
+                        <label for='work_sampling'>Probenahme<br /><i>Sampling</i></label>  
+                    </td>
+                </tr>
+                
+                <tr>
+                    
+                    <td>
+                        <input type="checkbox" name="work_measurements" value="1" id='work_measurements' class='checkbox-btn' />
+                        <label for='work_measurements'>Messung<br /><i>Measurement</i></label> 
+                    </td>
+                    <td>
+                        <input type="checkbox" name="work_drone" value="1" id='work_drone' class='checkbox-btn' />
+                        <label for='work_drone'>Drohne<br /><i>Drone</i></label>  
+                    </td>
+                    <td>
+                        <input type="checkbox" name="work_tour" value="1" id='work_tour' class='checkbox-btn' />
+                        <label for='work_tour'>Führung<br /><i>Guided tour</i></label>  
+                    </td>                                      
+                    <td>
+                        <input type="checkbox" name="work_other" value="1" id='work_other' class='checkbox-btn' />
+                        <label for='work_other'>Andere<br /><i>↓&emsp;Other&emsp;↓</i></label>  
+                    </td>    
+                </tr>
+                
+                <tr>                                         
+                    <td></td>  
+                    <td colspan="3">
+                        <input type="text" maxlength="76" size = "76" id="work_other_text" name="work_other_text" 
+                            placeholder="Falls andere, bitte hier angeben... / If other, please specify here...">
+                    </td>
+                </tr>
+            </table>            
+
+        </div>
+
+        <div class="group">
     
-    </form>    
+            <h2>Eintragen <span>· Log in</span></h1>   
+            
+            <hr />    
+            
+            <label for="action" class="deutsch">Bitte halten Sie jetzt den Dongle an das Lesegerät.<br /></label>
+            <label for="action" class="english">Please swipe your dongle now.</label><br />
+            <input type="hidden" name="action" value="log-in">
+            <input type="hidden" name="name" value="NA">
+            <input type="hidden" name="affiliation" value="NA"> 
+            <input type="text" name="token" id="token" autocomplete="off"/> <br />
+        </div>
+
+        <div>
+            <button id="btnSubmit" type="submit" class="next-button">Weiter<br /><i>Next</i></button>
+        </div>  
+
+    </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
     <!-- return home button -->

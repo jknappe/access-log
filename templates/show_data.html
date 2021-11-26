@@ -17,8 +17,6 @@
     <!-- return home button -->
     <a href="{{ url_for('admin') }}" class="home-button" id="home-button">Zurück<br /><i>Back</i> </a>
     
-    <hr />
-
     <table name="admin">
         <tr>
             <th>ID</th>
@@ -27,6 +25,15 @@
             <th>Name</th>
             <th>Affiliation</th>
             <th>Action</th>
+            <th>Ins</th>
+            <th>Mai</th>
+            <th>Equ</th>
+            <th>Sam</th>
+            <th>Mea</th>
+            <th>Dro</th>
+            <th>Tou</th>
+            <th>Oth</th>
+            <th>OthTxt</th>
             
         </tr>
         <!-- Load registered records from DB -->
@@ -38,7 +45,16 @@
                 <td>{{ record.token }}</td>
                 <td>{{ record.name}}</td>
                 <td>{{ record.affiliation }}</td>
-                <td>{{ record.action }}</td>                
+                <td>{{ record.action }}</td>
+                <td>{{ record.work_inspection }}</td>      
+                <td>{{ record.work_maintenance }}</td>      
+                <td>{{ record.work_equipment }}</td>      
+                <td>{{ record.work_sampling }}</td>      
+                <td>{{ record.work_measurements }}</td>      
+                <td>{{ record.work_drone }}</td>      
+                <td>{{ record.work_tour }}</td>      
+                <td>{{ record.work_other }}</td>      
+                <td>{{ record.work_other_text }}</td>                      
             </tr>
         {% endfor %}
     </table>

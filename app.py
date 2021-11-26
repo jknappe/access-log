@@ -28,7 +28,16 @@ class access_log_DB(db.Model):
     token = db.Column(db.String(20), nullable=False)
     action = db.Column(db.String(20), nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    affiliation = db.Column(db.String(100), nullable=False)
+    affiliation = db.Column(db.String(100), nullable=False)    
+    work_inspection = db.Column(db.String(10), default=False, nullable=False)
+    work_maintenance = db.Column(db.String(10), default=False, nullable=False)
+    work_equipment = db.Column(db.String(10), default=False, nullable=False)
+    work_sampling = db.Column(db.String(10), default=False, nullable=False)
+    work_measurements = db.Column(db.String(10), default=False, nullable=False)
+    work_drone = db.Column(db.String(10), default=False, nullable=False)
+    work_tour = db.Column(db.String(10), default=False, nullable=False)
+    work_other = db.Column(db.String(10), default=False, nullable=False)
+    work_other_text = db.Column(db.String(100), nullable=False) 
     datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -84,10 +93,62 @@ def login_form():
         token = request.form['token']
         action = request.form['action']
         name = request.form['name']
-        affiliation = request.form['affiliation']
+        affiliation = request.form['affiliation'] 
+        if request.form.get('work_inspection'):   
+            work_inspection = request.form['work_inspection']
+        else:
+            work_inspection = "0"
+        if request.form.get('work_maintenance'):   
+            work_maintenance = request.form['work_maintenance']
+        else:
+            work_maintenance = "0"
+        if request.form.get('work_equipment'):   
+            work_equipment = request.form['work_equipment']
+        else:
+            work_equipment = "0"
+        if request.form.get('work_sampling'):   
+            work_sampling = request.form['work_sampling']
+        else:
+            work_sampling = "0"
+        if request.form.get('work_measurements'):   
+            work_measurements = request.form['work_measurements']
+        else:
+            work_measurements = "0"
+        if request.form.get('work_drone'):   
+            work_drone = request.form['work_drone']
+        else:
+            work_drone = "0"
+        if request.form.get('work_tour'):   
+            work_tour = request.form['work_tour']
+        else:
+            work_tour = "0"
+        if request.form.get('work_other'):   
+            work_other = request.form['work_other']
+        else:
+            work_other = "0"
+        if request.form.get('work_other_text'):   
+            work_other_text = request.form['work_other_text']
+        else:
+            work_other_text = ""
+        
+       
     
         if token in valid_tokens:
-            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+            new_entry = access_log_DB(
+                token = token, 
+                action = action, 
+                name = name, 
+                affiliation = affiliation,
+                work_inspection = work_inspection,
+                work_maintenance = work_maintenance,
+                work_equipment = work_equipment,
+                work_sampling = work_sampling,
+                work_measurements = work_measurements,
+                work_drone = work_drone,
+                work_tour = work_tour,
+                work_other = work_other,
+                work_other_text = work_other_text
+                )
 
             try:
                 db.session.add(new_entry)
@@ -119,10 +180,33 @@ def logout_form():
         token = request.form['token']
         action = request.form['action']
         name = request.form['name']
-        affiliation = request.form['affiliation']
+        affiliation = request.form['affiliation'] 
+        work_inspection = request.form['work_inspection']
+        work_maintenance = request.form['work_maintenance']
+        work_equipment = request.form['work_equipment']
+        work_sampling = request.form['work_sampling']
+        work_measurements = request.form['work_measurements']
+        work_drone = request.form['work_drone']
+        work_tour = request.form['work_tour']
+        work_other = request.form['work_other']
+        work_other_text = request.form['work_other_text']
     
         if token in valid_tokens:
-            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+            new_entry = access_log_DB(
+                token = token, 
+                action = action, 
+                name = name, 
+                affiliation = affiliation,
+                work_inspection = work_inspection,
+                work_maintenance = work_maintenance,
+                work_equipment = work_equipment,
+                work_sampling = work_sampling,
+                work_measurements = work_measurements,
+                work_drone = work_drone,
+                work_tour = work_tour,
+                work_other = work_other,
+                work_other_text = work_other_text
+                )
 
             try:
                 db.session.add(new_entry)
@@ -163,6 +247,42 @@ def admin_login_form():
     if request.method == 'POST':
         token = request.form['token']
         action = request.form['action']
+        if request.form.get('work_inspection'):   
+            work_inspection = request.form['work_inspection']
+        else:
+            work_inspection = "0"
+        if request.form.get('work_maintenance'):   
+            work_maintenance = request.form['work_maintenance']
+        else:
+            work_maintenance = "0"
+        if request.form.get('work_equipment'):   
+            work_equipment = request.form['work_equipment']
+        else:
+            work_equipment = "0"
+        if request.form.get('work_sampling'):   
+            work_sampling = request.form['work_sampling']
+        else:
+            work_sampling = "0"
+        if request.form.get('work_measurements'):   
+            work_measurements = request.form['work_measurements']
+        else:
+            work_measurements = "0"
+        if request.form.get('work_drone'):   
+            work_drone = request.form['work_drone']
+        else:
+            work_drone = "0"
+        if request.form.get('work_tour'):   
+            work_tour = request.form['work_tour']
+        else:
+            work_tour = "0"
+        if request.form.get('work_other'):   
+            work_other = request.form['work_other']
+        else:
+            work_other = "0"
+        if request.form.get('work_other_text'):   
+            work_other_text = request.form['work_other_text']
+        else:
+            work_other_text = ""
 
         name = 'NA'
         if token == 'a':
@@ -182,7 +302,7 @@ def admin_login_form():
         elif token == '0015466677':
             name = 'Christian Hecht'
         elif token == '0004724076':
-            name = 'Admin 8'
+            name = 'Peter Otto'
         elif token == '0004499470':
             name = 'Admin 9'
         elif token == '0015465255':
@@ -206,14 +326,28 @@ def admin_login_form():
         elif token == '0015466677':
             affiliation = 'UFZ NSF'
         elif token == '0004724076':
-            affiliation = 'Admin 8'
+            affiliation = 'Uni Leipzig'
         elif token == '0004499470':
             affiliation = 'Admin 9'
         elif token == '0015465255':
             affiliation = 'Admin 10'    
     
         if token in admin_tokens:
-            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+            new_entry = access_log_DB(
+                token = token, 
+                action = action, 
+                name = name, 
+                affiliation = affiliation,
+                work_inspection = work_inspection,
+                work_maintenance = work_maintenance,
+                work_equipment = work_equipment,
+                work_sampling = work_sampling,
+                work_measurements = work_measurements,
+                work_drone = work_drone,
+                work_tour = work_tour,
+                work_other = work_other,
+                work_other_text = work_other_text
+                )
 
             try:
                 db.session.add(new_entry)
@@ -244,9 +378,32 @@ def admin_logout_form():
         action = request.form['action']
         name = request.form['name']
         affiliation = request.form['affiliation']
+        work_inspection = request.form['work_inspection']
+        work_maintenance = request.form['work_maintenance']
+        work_equipment = request.form['work_equipment']
+        work_sampling = request.form['work_sampling']
+        work_measurements = request.form['work_measurements']
+        work_drone = request.form['work_drone']
+        work_tour = request.form['work_tour']
+        work_other = request.form['work_other']
+        work_other_text = request.form['work_other_text']
     
         if token in admin_tokens:
-            new_entry = access_log_DB(token = token, action = action, name = name, affiliation = affiliation)
+            new_entry = access_log_DB(
+                token = token, 
+                action = action, 
+                name = name, 
+                affiliation = affiliation,
+                work_inspection = work_inspection,
+                work_maintenance = work_maintenance,
+                work_equipment = work_equipment,
+                work_sampling = work_sampling,
+                work_measurements = work_measurements,
+                work_drone = work_drone,
+                work_tour = work_tour,
+                work_other = work_other,
+                work_other_text = work_other_text
+                )
 
             try:
                 db.session.add(new_entry)
@@ -284,17 +441,28 @@ def show_data():
 
 @app.route('/download', methods=['GET'])
 def download_data():
+
     id = access_log_DB.query.with_entities(access_log_DB.id).order_by(access_log_DB.datetime.desc()).all()
     datetime = access_log_DB.query.with_entities(access_log_DB.datetime).order_by(access_log_DB.datetime.desc()).all()
     token = str(access_log_DB.query.with_entities(access_log_DB.token).order_by(access_log_DB.datetime.desc()).all())
     name = access_log_DB.query.with_entities(access_log_DB.name).order_by(access_log_DB.datetime.desc()).all()
     affiliation = access_log_DB.query.with_entities(access_log_DB.affiliation).order_by(access_log_DB.datetime.desc()).all()
     action = access_log_DB.query.with_entities(access_log_DB.action).order_by(access_log_DB.datetime.desc()).all()
+    work_inspection = access_log_DB.query.with_entities(access_log_DB.work_inspection).order_by(access_log_DB.datetime.desc()).all()
+    work_maintenance = access_log_DB.query.with_entities(access_log_DB.work_maintenance).order_by(access_log_DB.datetime.desc()).all()
+    work_equipment = access_log_DB.query.with_entities(access_log_DB.work_equipment).order_by(access_log_DB.datetime.desc()).all()
+    work_sampling = access_log_DB.query.with_entities(access_log_DB.work_sampling).order_by(access_log_DB.datetime.desc()).all()
+    work_measurements = access_log_DB.query.with_entities(access_log_DB.work_measurements).order_by(access_log_DB.datetime.desc()).all()
+    work_drone = access_log_DB.query.with_entities(access_log_DB.work_drone).order_by(access_log_DB.datetime.desc()).all()
+    work_tour = access_log_DB.query.with_entities(access_log_DB.work_tour).order_by(access_log_DB.datetime.desc()).all()
+    work_other = access_log_DB.query.with_entities(access_log_DB.work_other).order_by(access_log_DB.datetime.desc()).all()
+    work_other_text = access_log_DB.query.with_entities(access_log_DB.work_other_text).order_by(access_log_DB.datetime.desc()).all()
+
     excel.init_excel(app)
     extension_type = "csv"
     now = time.strftime("%Y%m%d-%H%M%S")
     filename = now + "_fgd_accesslog" + "." + extension_type
-    d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id}
+    d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id, 'work_inspection': work_inspection, 'work_maintenance': work_maintenance, 'work_equipment': work_equipment, 'work_sampling': work_sampling, 'work_measurements': work_measurements, 'work_drone': work_drone, 'work_tour': work_tour, 'work_other': work_other, 'work_other_text': work_other_text}
     src_dir = "/home/pi/Downloads/"
     dst_dir = "/home/pi/Downloads/archived/"
     try:

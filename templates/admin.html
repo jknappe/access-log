@@ -13,25 +13,25 @@
     <h2 class="top_stripe">Admin Modus <span>· Admin Mode</span></h2>
 
     <h2>Daten-Optionen <span>· Data options</span></h2>
-        <hr />
     
     <table class="admin-menu">
         <tr>
-            <td><a href="{{ url_for('show_data') }}" class="next-button">Daten anzeigen<br /><i>Show data</i> </a></td>
-            <td><a href="{{ url_for('download_data') }}" class="next-button">Daten exportieren<br /><i>Export data</i> </a></td>
+            <td><a href="{{ url_for('show_data') }}" class="admin-button">Daten anzeigen<br /><i>Show data</i> </a></td>
+            <td><a href="{{ url_for('download_data') }}" class="admin-button">Daten exportieren<br /><i>Export data</i> </a></td>
         </tr>
         <tr>
-            <td colspan="2"><a href="{{ url_for('email_form') }}" class="next-button">Exportierte Daten als Email senden<br /><i>Send exported data as email</i> </a></td>
+            <td colspan="2"><a href="{{ url_for('email_form') }}" class="admin-button">Exportierte Daten als Email senden<br /><i>Send exported data as email</i> </a></td>
            
         </tr>
     </table>
 
-    <h2>Logger-Optionen <span>· Logger options</span></h2>
+    <h2>RPi-Optionen <span>· RPi options</span></h2>
     
+
     <table class="admin-menu">
         <tr>
-            <td><a href="{{ url_for('reboot') }}" class="home-button">System neustarten<br /><i>Reboot system</i> </a></td>
-            <td><a href="{{ url_for('shutdown') }}" class="home-button">System herunterfahren<br /><i>Shutdown system</i> </a></td>
+            <td><a href="{{ url_for('reboot') }}" class="admin-button">System neustarten<br /><i>Reboot system</i> </a></td>
+            <td><a href="{{ url_for('shutdown') }}" class="admin-button">System herunterfahren<br /><i>Shutdown system</i> </a></td>
         </tr>
     </table>
 
