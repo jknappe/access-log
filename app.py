@@ -71,7 +71,7 @@ def index():
             # elif scanned_token == '0015466677':
             #     name = 'Christian'
             # elif scanned_token == '0004724076':
-            #     name = 'Admin 8'
+            #     name = 'Peter'
             # elif scanned_token == '0004499470':
             #     name = 'Admin 9'
             # elif scanned_token == '0015465255':
