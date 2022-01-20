@@ -474,6 +474,11 @@ def download_data():
         os.remove(csv_file);
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
 
+@app.route('/data2usb')
+def data2usb(): 
+    return redirect(url_for('admin'))
+    
+
 @app.route('/reboot')
 def reboot():
     os.system("sudo shutdown -r now")
