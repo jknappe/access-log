@@ -72,10 +72,11 @@ html{
     color: #333333;
   }
   
-div.code {
+div.pincode {
   font-size: 3.0em;
   font-style: normal;
   font-weight: bold;
+  letter-spacing: 0.7em;
   background-color: #333333;
   text-align: center;
   color: #ffffff;

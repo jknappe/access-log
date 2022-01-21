@@ -232,7 +232,9 @@ def logout_form():
 
 @app.route('/login_success')
 def login_success():
-    return render_template('login_success.html')
+    with app.open_resource('static/pincode.txt', 'r') as f:
+        pincode = f.read()
+    return render_template('login_success.html', pincode = pincode)
 
 @app.route('/logout_success')
 def logout_success():
@@ -433,7 +435,9 @@ def admin_logout_form():
 
 @app.route('/admin_login_success', methods=['POST', 'GET'])
 def admin_login_success():
-    return render_template('admin_login_success.html')
+    with app.open_resource('static/pincode.txt', 'r') as f:
+        pincode = f.read()
+    return render_template('admin_login_success.html', pincode = pincode)
 
 @app.route('/admin_logout_success', methods=['POST', 'GET'])
 def admin_logout_success():
