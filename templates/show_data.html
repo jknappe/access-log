@@ -24,16 +24,17 @@
             <th>Token</th>
             <th>Name</th>
             <th>Affiliation</th>
+            <th>#People</th>
             <th>Action</th>
-            <th>Ins</th>
-            <th>Mai</th>
-            <th>Equ</th>
-            <th>Sam</th>
-            <th>Mea</th>
-            <th>Dro</th>
-            <th>Tou</th>
-            <th>Oth</th>
-            <th>OthTxt</th>
+            <th>INS</th>
+            <th>MNT</th>
+            <th>EQP</th>
+            <th>SMP</th>
+            <th>MSR</th>
+            <th>DRN</th>
+            <th>TUR</th>
+            <th>OTR</th>
+            <th>OTX</th>
             
         </tr>
         <!-- Load registered records from DB -->
@@ -45,6 +46,7 @@
                 <td>{{ record.token }}</td>
                 <td>{{ record.name}}</td>
                 <td>{{ record.affiliation }}</td>
+                <td>{{ record.nr_people }}</td>
                 <td>{{ record.action }}</td>
                 <td>{{ record.work_inspection }}</td>      
                 <td>{{ record.work_maintenance }}</td>      

@@ -131,6 +131,11 @@ table[name=admin]{
   margin-right: auto;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Images */
 /* ------ */
 .arrow-image{
@@ -262,6 +267,66 @@ input.checkbox-btn:checked + label {
   box-shadow: 0px 0px 3px inset;
   background: #75da7d;
 }
+
+
+input.radiobox-s-btn {
+  display: none;
+}
+input.radiobox-s-btn + label {
+  border: none;
+  background-color: #e4e4e4;
+  padding: 5px 8px;
+  cursor: pointer;  
+  font-style: italic;
+  color: #333333;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.0em;
+  margin: 4px 2px;
+  width: 80px;
+  height: 50px;
+}
+input.radiobox-s-btn + label:first-line {
+  font-style: normal;
+  color: #000000;
+}
+input.radiobox-s-btn + label:active,
+input.radiobox-s-btn:checked + label {
+  box-shadow: 0px 0px 3px inset;
+  background: #75da7d;
+}
+
+input.radiobox-l-btn {
+  display: none;
+}
+input.radiobox-l-btn + label {
+  border: none;
+  background-color: #e4e4e4;
+  padding: 5px 8px;
+  cursor: pointer;  
+  font-style: italic;
+  color: #333333;
+  text-align: center;
+  line-height: 180px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.0em;
+  margin: 4px 2px;
+  width: 160px;
+  height: 195px;
+}
+input.radiobox-l-btn + label:first-line {
+  font-style: normal;
+  color: #000000;
+}
+input.radiobox-l-btn + label:active,
+input.radiobox-l-btn:checked + label {
+  box-shadow: 0px 0px 3px inset;
+  background: #75da7d;
+}
+
 
 /* Input fields */
 /* ------------ */

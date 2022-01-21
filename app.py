@@ -38,6 +38,7 @@ class access_log_DB(db.Model):
     work_tour = db.Column(db.String(10), default=False, nullable=False)
     work_other = db.Column(db.String(10), default=False, nullable=False)
     work_other_text = db.Column(db.String(100), nullable=False) 
+    nr_people = db.Column(db.Integer, nullable=False)
     datetime = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -94,6 +95,7 @@ def login_form():
         action = request.form['action']
         name = request.form['name']
         affiliation = request.form['affiliation'] 
+        nr_people = request.form['nr_people'] 
         if request.form.get('work_inspection'):   
             work_inspection = request.form['work_inspection']
         else:
@@ -139,6 +141,7 @@ def login_form():
                 action = action, 
                 name = name, 
                 affiliation = affiliation,
+                nr_people = nr_people,
                 work_inspection = work_inspection,
                 work_maintenance = work_maintenance,
                 work_equipment = work_equipment,
@@ -181,6 +184,7 @@ def logout_form():
         action = request.form['action']
         name = request.form['name']
         affiliation = request.form['affiliation'] 
+        nr_people = request.form['nr_people'] 
         work_inspection = request.form['work_inspection']
         work_maintenance = request.form['work_maintenance']
         work_equipment = request.form['work_equipment']
@@ -197,6 +201,7 @@ def logout_form():
                 action = action, 
                 name = name, 
                 affiliation = affiliation,
+                nr_people = nr_people,
                 work_inspection = work_inspection,
                 work_maintenance = work_maintenance,
                 work_equipment = work_equipment,
@@ -247,6 +252,7 @@ def admin_login_form():
     if request.method == 'POST':
         token = request.form['token']
         action = request.form['action']
+        nr_people = request.form['nr_people']
         if request.form.get('work_inspection'):   
             work_inspection = request.form['work_inspection']
         else:
@@ -338,6 +344,7 @@ def admin_login_form():
                 action = action, 
                 name = name, 
                 affiliation = affiliation,
+                nr_people = nr_people,
                 work_inspection = work_inspection,
                 work_maintenance = work_maintenance,
                 work_equipment = work_equipment,
@@ -378,6 +385,7 @@ def admin_logout_form():
         action = request.form['action']
         name = request.form['name']
         affiliation = request.form['affiliation']
+        nr_people = request.form['nr_people']
         work_inspection = request.form['work_inspection']
         work_maintenance = request.form['work_maintenance']
         work_equipment = request.form['work_equipment']
@@ -394,6 +402,7 @@ def admin_logout_form():
                 action = action, 
                 name = name, 
                 affiliation = affiliation,
+                nr_people = nr_people,
                 work_inspection = work_inspection,
                 work_maintenance = work_maintenance,
                 work_equipment = work_equipment,
@@ -447,6 +456,7 @@ def download_data():
     token = str(access_log_DB.query.with_entities(access_log_DB.token).order_by(access_log_DB.datetime.desc()).all())
     name = access_log_DB.query.with_entities(access_log_DB.name).order_by(access_log_DB.datetime.desc()).all()
     affiliation = access_log_DB.query.with_entities(access_log_DB.affiliation).order_by(access_log_DB.datetime.desc()).all()
+    nr_people = access_log_DB.query.with_entities(access_log_DB.nr_people).order_by(access_log_DB.datetime.desc()).all()
     action = access_log_DB.query.with_entities(access_log_DB.action).order_by(access_log_DB.datetime.desc()).all()
     work_inspection = access_log_DB.query.with_entities(access_log_DB.work_inspection).order_by(access_log_DB.datetime.desc()).all()
     work_maintenance = access_log_DB.query.with_entities(access_log_DB.work_maintenance).order_by(access_log_DB.datetime.desc()).all()
@@ -462,7 +472,7 @@ def download_data():
     extension_type = "csv"
     now = time.strftime("%Y%m%d-%H%M%S")
     filename = now + "_fgd_accesslog" + "." + extension_type
-    d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id, 'work_inspection': work_inspection, 'work_maintenance': work_maintenance, 'work_equipment': work_equipment, 'work_sampling': work_sampling, 'work_measurements': work_measurements, 'work_drone': work_drone, 'work_tour': work_tour, 'work_other': work_other, 'work_other_text': work_other_text}
+    d = {'action': action, 'affiliation': affiliation, 'name': name, 'token': token, 'datetime': datetime, 'id': id, 'nr_people': nr_people, 'work_inspection': work_inspection, 'work_maintenance': work_maintenance, 'work_equipment': work_equipment, 'work_sampling': work_sampling, 'work_measurements': work_measurements, 'work_drone': work_drone, 'work_tour': work_tour, 'work_other': work_other, 'work_other_text': work_other_text}
     src_dir = "/home/pi/Downloads/"
     dst_dir = "/home/pi/Downloads/archived/"
     try:
