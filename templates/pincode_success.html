@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #00937F;}
+   </style>
+    <title>Neuer Pincode · New pincode</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        
+        <h1>Neuer Pincode <span>· New pincode</span></h1>
+        <hr />
+
+        <div class="deutsch">
+            Der neue Pincode für den Schlüsselkasten lautet:
+        </div>
+
+        <div class="english">
+            The new pin code for the key box is:
+        </div>
+        
+        <br />
+
+        <div class="pincode">
+            {{ pincode }}
+        </div> 
+        
+        <br />
+
+        <!-- return home button -->
+        <a href="{{ url_for('admin') }}" class="home-button">Zurück<br /><i>Back</i> </a>  
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/admin";
+
+        }, 10000);
+
+    </script>
+
+{% endblock %}

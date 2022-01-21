@@ -488,6 +488,29 @@ def download_data():
         os.remove(csv_file);
     return excel.make_response_from_dict(d, file_type=extension_type, file_name=filename)
 
+@app.route('/pincode_form', methods=['POST', 'GET'])
+def pincode_form():
+    if request.method == 'POST':
+        pincode_1 = request.form['pincode_1']
+        pincode_2 = request.form['pincode_2']
+        pincode_3 = request.form['pincode_3']
+        pincode_4 = request.form['pincode_4']
+        pincode_new = str(pincode_1) + str(pincode_2) + str(pincode_3) + str(pincode_4)
+        with open("static/pincode.txt", "w") as fo:
+            fo.writelines(pincode_new)
+            fo.close()
+        return redirect(url_for('pincode_success'))
+    else:     
+        with app.open_resource('static/pincode.txt', 'r') as f:
+            pincode = f.read()
+        return render_template('pincode_form.html', pincode = pincode)
+
+@app.route('/pincode_success', methods=['POST', 'GET'])
+def pincode_success():
+    with app.open_resource('static/pincode.txt', 'r') as f:
+        pincode = f.read()
+    return render_template('pincode_success.html', pincode = pincode)
+
 @app.route('/data2usb')
 def data2usb(): 
     return redirect(url_for('admin'))

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #00937F;}
+   </style>
+<title>Neuen Pincode festlegen · Set new pin code</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    
+    <h1>Neuen Pincode festlegen <span>· Set new pin code</span></h1>   
+    
+    <hr />
+
+    <div class="deutsch">
+        Bitte geben sie den neuen Code ein.
+    </div>
+
+    <div class="english">
+        Please enter the new code.
+    </div>
+
+    <hr />
+
+    <form id="pincode_form" name="pincode_form" action="pincode_form" method="POST">
+
+        <div>
+            <label for="name" class="deutsch">Der derzeitige Code lautet: {{ pincode }}</label>
+            <label for="name" class="english">· The current code is: {{ pincode }}</label><br />
+            <input type="number" name="pincode_1" id="pincode_1" size="1" placeholder="1" min="0" max="9" required>
+            <input type="number" name="pincode_2" id="pincode_2" size="1" placeholder="2" min="0" max="9" required>
+            <input type="number" name="pincode_3" id="pincode_3" size="1" placeholder="3" min="0" max="9" required>
+            <input type="number" name="pincode_4" id="pincode_4" size="1" placeholder="4" min="0" max="9" required>
+            <br />
+            <br />
+        </div>        
+
+        <div>
+            <!-- <input type="submit" value="Send Request"> -->
+            <button id="pincode_submit" type="submit" class="next-button">Code ändern<br /><i>Change code</i></button>
+        </div>  
+
+    </form>    
+
+    <!-- return back button -->
+    <a href="{{ url_for('admin') }}" class="home-button" id="home-button">Zurück<br /><i>Back</i> </a>
+
+</div>
+
+    <!-- JS for automatic redirect after two minutes -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 120000);
+
+    </script>
+
+{% endblock %}
