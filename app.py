@@ -514,7 +514,7 @@ def pincode_success():
 @app.route('/data2usb')
 def data2usb(): 
     os.system("sudo mount /dev/sda1 /media/usb -o uid=pi,gid=pi")
-    os.system("cp README.md /media/usb/")
+    os.system("cp /home/pi/Downloads/* /media/usb/")
     os.system("sudo umount /media/usb/")
     return redirect(url_for('admin'))
     
