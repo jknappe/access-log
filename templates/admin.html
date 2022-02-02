@@ -36,6 +36,16 @@
         </tr>
     </table>
 
+    <h2>Zeit Einstellungen <span>· Time settings</span></h2>
+    
+
+    <table class="admin-menu">
+        <tr>
+            <td><a href="{{ url_for('admin_systime') }}" class="admin-button">System Zeit anzeigen<br /><i>Show system time</i> </a></td>
+            <td><a href="{{ url_for('admin_uptime') }}" class="admin-button">System Laufzeit anzeigen<br /><i>Show system up time</i> </a></td>
+        </tr>
+    </table>
+
     <h2>RPi-Optionen <span>· RPi options</span></h2>
     
 
@@ -43,15 +53,6 @@
         <tr>
             <td><a href="{{ url_for('reboot') }}" class="admin-button">System neustarten<br /><i>Reboot system</i> </a></td>
             <td><a href="{{ url_for('shutdown') }}" class="admin-button">System herunterfahren<br /><i>Shutdown system</i> </a></td>
-        </tr>
-    </table>
-
-    <h2>Zeit Einstellungen <span>· Time settings</span></h2>
-    
-
-    <table class="admin-menu">
-        <tr>
-            <td><a href="{{ url_for('admin_time') }}" class="admin-button">System Zeit anzeigen<br /><i>Show system time</i> </a></td>
         </tr>
     </table>
 

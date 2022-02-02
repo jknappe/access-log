@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #9CC666;}
+   </style>
+    <title>System Laufzeit · System uptime</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        
+        <h1>Aktuelle System-Zeit <span>· Current system time</span></h1>
+        <hr />
+
+        <div class="deutsch">
+            Die aktuelle Laufzeit des Systems ist:
+        </div>
+
+        <div class="english">
+            The current system uptime is:
+        </div>
+        
+        <br />
+
+        <div class="timedisplay">
+            {{ uptime }}
+        </div> 
+        
+        <br />
+
+        <!-- retuen home button -->
+        <a href="{{ url_for('admin') }}" class="home-button">Zurück<br /><i>Back</i> </a>  
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/admin_uptime";
+
+        }, 10000);
+
+    </script>
+
+{% endblock %}

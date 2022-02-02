@@ -447,11 +447,16 @@ def admin_logout_success():
 def admin():
     return render_template('admin.html')    
 
-@app.route('/admin_time', methods=['POST', 'GET'])
-def admin_time():
+@app.route('/admin_systime', methods=['POST', 'GET'])
+def admin_systime():
     now = datetime.now() # current date and time
     date_time = now.strftime("%Y-%m-%d %H:%M:%S")
-    return render_template('admin_time.html', date_time=date_time)    
+    return render_template('admin_systime.html', date_time=date_time)      
+
+@app.route('/admin_uptime', methods=['POST', 'GET'])
+def admin_uptime():
+    uptime =os.popen('uptime -p').read()[:-1] # time since boot
+    return render_template('admin_uptime.html', uptime=uptime)    
 
 @app.route('/show_data', methods=['POST', 'GET'])
 def show_data():
