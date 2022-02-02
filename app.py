@@ -447,6 +447,12 @@ def admin_logout_success():
 def admin():
     return render_template('admin.html')    
 
+@app.route('/admin_time', methods=['POST', 'GET'])
+def admin_time():
+    now = datetime.now() # current date and time
+    date_time = now.strftime("%Y-%m-%d %H:%M:%S")
+    return render_template('admin_time.html', date_time=date_time)    
+
 @app.route('/show_data', methods=['POST', 'GET'])
 def show_data():
     data = access_log_DB.query.order_by(access_log_DB.datetime.desc()).all()   

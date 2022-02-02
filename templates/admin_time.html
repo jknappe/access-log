@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #9CC666;}
+   </style>
+    <title>System Zeit · System time</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        
+        <h1>Aktuelle System-Zeit <span>· Current system time</span></h1>
+        <hr />
+
+        <div class="deutsch">
+            Die aktuelle Systemzeit ist:
+        </div>
+
+        <div class="english">
+            The current system time is:
+        </div>
+        
+        <br />
+
+        <div class="timedisplay">
+            {{ date_time }}
+        </div> 
+        
+        <br />
+
+        <div class="deutsch">
+            Die Systemzeit sollte in UTC angezeigt werden, d.h. der Unterschied zur lokalen Zeit beträgt UTC+1 Stunde (Winterzeit) oder UTC+2 Stunden (Sommerzeit).
+        </div>
+
+        <div class="english">
+            The system time should be displayed in UTC, i.e. deviate to local time by UTC+1 hour (normal time) or UTC+2 hours (dayight saving time).
+        </div>
+        
+        <br />
+
+        <!-- retuen home button -->
+        <a href="{{ url_for('admin') }}" class="home-button">Zurück<br /><i>Back</i> </a>  
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/admin_time";
+
+        }, 1000);
+
+    </script>
+
+{% endblock %}

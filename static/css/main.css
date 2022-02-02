@@ -82,6 +82,16 @@ div.pincode {
   color: #ffffff;
 }
 
+div.timedisplay {
+  font-size: 1.0em;
+  font-style: normal;
+  font-weight: bold;
+  letter-spacing: 0.7em;
+  background-color: #333333;
+  text-align: center;
+  color: #ffffff;
+}
+
 label.deutsch {
   font-style: normal;
   color: #000000;
