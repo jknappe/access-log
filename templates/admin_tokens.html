@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #00937F;}
+   </style>
+<title>Zugewiesene Admin Dongles · Assigned admin dongles</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+
+    <h1>Zugewiesene Admin Dongles <span>· Assigned admin dongles</span></h1>   
+    
+    <hr />
+
+    <table name="admin">
+        <tr>
+            <th>Dongle</th>
+            <th>Name</th>
+            <th>Affiliation</th>
+            <th></th>
+            
+        </tr>
+
+        <tr>
+            <td>{{ admin01_token }}</td>
+            <td>{{ admin01_name }}</td>
+            <td>{{ admin01_affiliation }}</td>   
+            <td><a href="{{ url_for('admin_token_assign_01') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>             
+        </tr>
+        <tr>
+            <td>{{ admin02_token }}</td>
+            <td>{{ admin02_name }}</td>
+            <td>{{ admin02_affiliation }}</td>   
+            <td><a href="{{ url_for('admin_token_assign_02') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>                
+        </tr>
+        <tr>
+            <td>{{ admin03_token }}</td>
+            <td>{{ admin03_name }}</td>
+            <td>{{ admin03_affiliation }}</td>   
+            <td><a href="{{ url_for('admin_token_assign_03') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>          
+        </tr>
+        <tr>
+            <td>{{ admin04_token }}</td>
+            <td>{{ admin04_name }}</td>
+            <td>{{ admin04_affiliation }}</td> 
+            <td><a href="{{ url_for('admin_token_assign_04') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>            
+        </tr>
+        <tr>
+            <td>{{ admin05_token }}</td>
+            <td>{{ admin05_name }}</td>
+            <td>{{ admin05_affiliation }}</td>   
+            <td><a href="{{ url_for('admin_token_assign_05') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>          
+        </tr>
+        <tr>
+            <td>{{ admin06_token }}</td>
+            <td>{{ admin06_name }}</td>
+            <td>{{ admin06_affiliation }}</td>  
+            <td><a href="{{ url_for('admin_token_assign_06') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>           
+        </tr>
+        <tr>
+            <td>{{ admin07_token }}</td>
+            <td>{{ admin07_name }}</td>
+            <td>{{ admin07_affiliation }}</td> 
+            <td><a href="{{ url_for('admin_token_assign_07') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>            
+        </tr>
+        <tr>
+            <td>{{ admin08_token }}</td>
+            <td>{{ admin08_name }}</td>
+            <td>{{ admin08_affiliation }}</td> 
+            <td><a href="{{ url_for('admin_token_assign_08') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>            
+        </tr>
+        <tr>
+            <td>{{ admin09_token }}</td>
+            <td>{{ admin09_name }}</td>
+            <td>{{ admin09_affiliation }}</td> 
+            <td><a href="{{ url_for('admin_token_assign_09') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>            
+        </tr>
+        <tr>
+            <td>{{ admin10_token }}</td>
+            <td>{{ admin10_name }}</td>
+            <td>{{ admin10_affiliation }}</td>   
+            <td><a href="{{ url_for('admin_token_assign_10') }}"  class="assign-button" id="assign-button">Ändern <i>· Change</i></a></td>          
+        </tr>
+    </table>
+
+    <hr>
+
+    <!-- return home button -->
+    <a href="{{ url_for('admin') }}" class="home-button" id="home-button">Zurück<br /><i>Back</i> </a>
+
+</div>
+
+<!-- JS for automatic redirect after two minutes -->
+<script>    
+    window.setTimeout(function(){
+
+    // Move to a new location or you can do something else
+    window.location.href = "/";
+
+    }, 120000);
+
+</script>
+{% endblock %}

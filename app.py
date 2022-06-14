@@ -4,6 +4,7 @@ from datetime import datetime
 from flask_mail import Mail, Message
 
 import flask_excel as excel
+import pandas as pd
 import os, shutil, glob, time
 
 app = Flask(__name__)
@@ -249,10 +250,47 @@ def admin_login_form():
     error = False
     errorDE = None
     errorEN = None
+
+    # get admin token data from CSV file
+    admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+    admin01_token = admin_tokens.iat[0,0]
+    admin01_name = admin_tokens.iat[0,1]
+    admin01_affiliation = admin_tokens.iat[0,2]
+    admin02_token = admin_tokens.iat[1,0]
+    admin02_name = admin_tokens.iat[1,1]
+    admin02_affiliation = admin_tokens.iat[1,2]
+    admin03_token = admin_tokens.iat[2,0]
+    admin03_name = admin_tokens.iat[2,1]
+    admin03_affiliation = admin_tokens.iat[2,2]
+    admin04_token = admin_tokens.iat[3,0]
+    admin04_name = admin_tokens.iat[3,1]
+    admin04_affiliation = admin_tokens.iat[3,2]
+    admin05_token = admin_tokens.iat[4,0]
+    admin05_name = admin_tokens.iat[4,1]
+    admin05_affiliation = admin_tokens.iat[4,2]
+    admin06_token = admin_tokens.iat[5,0]
+    admin06_name = admin_tokens.iat[5,1]
+    admin06_affiliation = admin_tokens.iat[5,2]
+    admin07_token = admin_tokens.iat[6,0]
+    admin07_name = admin_tokens.iat[6,1]
+    admin07_affiliation = admin_tokens.iat[6,2]
+    admin08_token = admin_tokens.iat[7,0]
+    admin08_name = admin_tokens.iat[7,1]
+    admin08_affiliation = admin_tokens.iat[7,2]
+    admin09_token = admin_tokens.iat[8,0]
+    admin09_name = admin_tokens.iat[8,1]
+    admin09_affiliation = admin_tokens.iat[8,2]
+    admin10_token = admin_tokens.iat[9,0]
+    admin10_name = admin_tokens.iat[9,1]
+    admin10_affiliation = admin_tokens.iat[9,2]
+    admin00_token = admin_tokens.iat[10,0]
+    admin00_name = admin_tokens.iat[10,1]
+    admin00_affiliation = admin_tokens.iat[10,2]
+
     admin_tokens = ['a', '0004484801', '0003949645', '0004656070', '0004499470', '0015465255', '0004498655', '0004724076', '0015465203', '0015465087', '0015466677']
 
     if request.method == 'POST':
-        token = request.form['token']
+        scanned_token = request.form['token']
         action = request.form['action']
         nr_people = request.form['nr_people']
         if request.form.get('work_inspection'):   
@@ -292,60 +330,60 @@ def admin_login_form():
         else:
             work_other_text = ""
 
-        name = 'NA'
-        if token == 'a':
-            name = 'Test-Admin'
-        elif token == '0015465087':
-            name = 'Jan Knappe'
-        elif token == '0004498655':
-            name = 'Lucie Moeller'
-        elif token == '0015465203':
-            name = 'Katy Bernhard'
-        elif token == '0004656070':
-            name = 'Max Ueberham'
-        elif token == '0003949645':
-            name = 'Ralf Trabitzsch'
-        elif token == '0004484801':
-            name = 'Niels Wollschläger'
-        elif token == '0015466677':
-            name = 'Christian Hecht'
-        elif token == '0004724076':
-            name = 'Peter Otto'
-        elif token == '0004499470':
-            name = 'Admin 9'
-        elif token == '0015465255':
-            name = 'Admin 10'          
+        admin_name = 'NA'
+        if scanned_token == admin00_token:
+            admin_name = admin00_name
+        elif scanned_token == admin01_token:
+            admin_name = admin01_name
+        elif scanned_token == admin02_token:
+            admin_name = admin02_name
+        elif scanned_token == admin03_token:
+            admin_name = admin03_name
+        elif scanned_token == admin04_token:
+            admin_name = admin04_name
+        elif scanned_token == admin05_token:
+            admin_name = admin05_name
+        elif scanned_token == admin06_token:
+            admin_name = admin06_name
+        elif scanned_token == admin07_token:
+            admin_name = admin07_name
+        elif scanned_token == admin08_token:
+            admin_name = admin08_name
+        elif scanned_token == admin09_token:
+            admin_name = admin09_name
+        elif scanned_token == admin10_token:
+            admin_name = admin10_name         
 
-        affiliation = 'NA'
-        if token == 'a':
-            affiliation = 'Test-Admin'
-        elif token == '0015465087':
-            affiliation = 'UFZ UBZ'
-        elif token == '0004498655':
-            affiliation = 'UFZ UBZ'
-        elif token == '0015465203':
-            affiliation = 'UFZ UBZ'
-        elif token == '0004656070':
-            affiliation = 'UFZ UBZ'
-        elif token == '0003949645':
-            affiliation = 'UFZ ENVINF'
-        elif token == '0004484801':
-            affiliation = 'UFZ SUSOZ'
-        elif token == '0015466677':
-            affiliation = 'UFZ NSF'
-        elif token == '0004724076':
-            affiliation = 'Uni Leipzig'
-        elif token == '0004499470':
-            affiliation = 'Admin 9'
-        elif token == '0015465255':
-            affiliation = 'Admin 10'    
+        admin_affiliation = 'NA'
+        if scanned_token == admin00_token:
+            admin_affiliation = admin00_affiliation
+        elif scanned_token == admin01_token:
+            admin_affiliation = admin01_affiliation
+        elif scanned_token == admin02_token:
+            admin_affiliation = admin02_affiliation
+        elif scanned_token == admin03_token:
+            admin_affiliation = admin03_affiliation
+        elif scanned_token == admin04_token:
+            admin_affiliation = admin04_affiliation
+        elif scanned_token == admin05_token:
+            admin_affiliation = admin05_affiliation
+        elif scanned_token == admin06_token:
+            admin_affiliation = admin06_affiliation
+        elif scanned_token == admin07_token:
+            admin_affiliation = admin07_affiliation
+        elif scanned_token == admin08_token:
+            admin_affiliation = admin08_affiliation
+        elif scanned_token == admin09_token:
+            admin_affiliation = admin09_affiliation
+        elif scanned_token == admin10_token:
+            admin_affiliation = admin10_affiliation  
     
-        if token in admin_tokens:
+        if scanned_token in admin_tokens:
             new_entry = access_log_DB(
-                token = token, 
+                token = scanned_token, 
                 action = action, 
-                name = name, 
-                affiliation = affiliation,
+                name = admin_name, 
+                affiliation = admin_affiliation,
                 nr_people = nr_people,
                 work_inspection = work_inspection,
                 work_maintenance = work_maintenance,
@@ -521,6 +559,977 @@ def pincode_success():
     with app.open_resource('static/pincode.txt', 'r') as f:
         pincode = f.read()
     return render_template('pincode_success.html', pincode = pincode)
+
+
+
+@app.route('/admin_tokens', methods=['POST', 'GET'])
+def admin_tokens():
+    admin_tokens = pd.read_csv('static/admin-tokens.csv')
+    
+    admin01_token = admin_tokens.iat[0,0]
+    admin01_name = admin_tokens.iat[0,1]
+    admin01_affiliation = admin_tokens.iat[0,2]
+    admin02_token = admin_tokens.iat[1,0]
+    admin02_name = admin_tokens.iat[1,1]
+    admin02_affiliation = admin_tokens.iat[1,2]
+    admin03_token = admin_tokens.iat[2,0]
+    admin03_name = admin_tokens.iat[2,1]
+    admin03_affiliation = admin_tokens.iat[2,2]
+    admin04_token = admin_tokens.iat[3,0]
+    admin04_name = admin_tokens.iat[3,1]
+    admin04_affiliation = admin_tokens.iat[3,2]
+    admin05_token = admin_tokens.iat[4,0]
+    admin05_name = admin_tokens.iat[4,1]
+    admin05_affiliation = admin_tokens.iat[4,2]
+    admin06_token = admin_tokens.iat[5,0]
+    admin06_name = admin_tokens.iat[5,1]
+    admin06_affiliation = admin_tokens.iat[5,2]
+    admin07_token = admin_tokens.iat[6,0]
+    admin07_name = admin_tokens.iat[6,1]
+    admin07_affiliation = admin_tokens.iat[6,2]
+    admin08_token = admin_tokens.iat[7,0]
+    admin08_name = admin_tokens.iat[7,1]
+    admin08_affiliation = admin_tokens.iat[7,2]
+    admin09_token = admin_tokens.iat[8,0]
+    admin09_name = admin_tokens.iat[8,1]
+    admin09_affiliation = admin_tokens.iat[8,2]
+    admin10_token = admin_tokens.iat[9,0]
+    admin10_name = admin_tokens.iat[9,1]
+    admin10_affiliation = admin_tokens.iat[9,2]
+    admin00_token = admin_tokens.iat[10,0]
+    admin00_name = admin_tokens.iat[10,1]
+    admin00_affiliation = admin_tokens.iat[10,2]
+
+    return render_template('admin_tokens.html', 
+    admin_tokens = admin_tokens, 
+    admin01_token = admin01_token,
+    admin01_name = admin01_name,
+    admin01_affiliation = admin01_affiliation, 
+    admin02_token = admin02_token,
+    admin02_name = admin02_name,
+    admin02_affiliation = admin02_affiliation, 
+    admin03_token = admin03_token,
+    admin03_name = admin03_name,
+    admin03_affiliation = admin03_affiliation, 
+    admin04_token = admin04_token,
+    admin04_name = admin04_name,
+    admin04_affiliation = admin04_affiliation, 
+    admin05_token = admin05_token,
+    admin05_name = admin05_name,
+    admin05_affiliation = admin05_affiliation, 
+    admin06_token = admin06_token,
+    admin06_name = admin06_name,
+    admin06_affiliation = admin06_affiliation, 
+    admin07_token = admin07_token,
+    admin07_name = admin07_name,
+    admin07_affiliation = admin07_affiliation, 
+    admin08_token = admin08_token,
+    admin08_name = admin08_name,
+    admin08_affiliation = admin08_affiliation, 
+    admin09_token = admin09_token,
+    admin09_name = admin09_name,
+    admin09_affiliation = admin09_affiliation, 
+    admin10_token = admin10_token,
+    admin10_name = admin10_name,
+    admin10_affiliation = admin10_affiliation, 
+    admin00_token = admin00_token,
+    admin00_name = admin00_name,
+    admin00_affiliation = admin00_affiliation)
+
+
+
+@app.route('/admin_token_assign_01', methods=['POST', 'GET'])
+def admin_token_assign_01():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin01_token = request.form['admin01_token_assigned']
+        admin01_name = request.form['admin01_name_assigned']
+        admin01_affiliation = request.form['admin01_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]        
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2] 
+               
+        return render_template('admin_token_assign_01.html', 
+        admin01_token = admin01_token,
+        admin01_name = admin01_name,
+        admin01_affiliation = admin01_affiliation)
+
+
+@app.route('/admin_token_assign_02', methods=['POST', 'GET'])
+def admin_token_assign_02():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin02_token = request.form['admin02_token_assigned']
+        admin02_name = request.form['admin02_name_assigned']
+        admin02_affiliation = request.form['admin02_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2] 
+               
+        return render_template('admin_token_assign_02.html', 
+        admin02_token = admin02_token,
+        admin02_name = admin02_name,
+        admin02_affiliation = admin02_affiliation)
+
+@app.route('/admin_token_assign_03', methods=['POST', 'GET'])
+def admin_token_assign_03():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin03_token = request.form['admin03_token_assigned']
+        admin03_name = request.form['admin03_name_assigned']
+        admin03_affiliation = request.form['admin03_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2] 
+               
+        return render_template('admin_token_assign_03.html', 
+        admin03_token = admin03_token,
+        admin03_name = admin03_name,
+        admin03_affiliation = admin03_affiliation)
+
+@app.route('/admin_token_assign_04', methods=['POST', 'GET'])
+def admin_token_assign_04():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin04_token = request.form['admin04_token_assigned']
+        admin04_name = request.form['admin04_name_assigned']
+        admin04_affiliation = request.form['admin04_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2] 
+               
+        return render_template('admin_token_assign_04.html', 
+        admin04_token = admin04_token,
+        admin04_name = admin04_name,
+        admin04_affiliation = admin04_affiliation)
+
+@app.route('/admin_token_assign_05', methods=['POST', 'GET'])
+def admin_token_assign_05():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin05_token = request.form['admin05_token_assigned']
+        admin05_name = request.form['admin05_name_assigned']
+        admin05_affiliation = request.form['admin05_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2] 
+               
+        return render_template('admin_token_assign_05.html', 
+        admin05_token = admin05_token,
+        admin05_name = admin05_name,
+        admin05_affiliation = admin05_affiliation)
+
+@app.route('/admin_token_assign_06', methods=['POST', 'GET'])
+def admin_token_assign_06():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin06_token = request.form['admin06_token_assigned']
+        admin06_name = request.form['admin06_name_assigned']
+        admin06_affiliation = request.form['admin06_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2] 
+               
+        return render_template('admin_token_assign_06.html', 
+        admin06_token = admin06_token,
+        admin06_name = admin06_name,
+        admin06_affiliation = admin06_affiliation)
+
+@app.route('/admin_token_assign_07', methods=['POST', 'GET'])
+def admin_token_assign_07():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin07_token = request.form['admin07_token_assigned']
+        admin07_name = request.form['admin07_name_assigned']
+        admin07_affiliation = request.form['admin07_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2] 
+               
+        return render_template('admin_token_assign_07.html', 
+        admin07_token = admin07_token,
+        admin07_name = admin07_name,
+        admin07_affiliation = admin07_affiliation)
+
+@app.route('/admin_token_assign_08', methods=['POST', 'GET'])
+def admin_token_assign_08():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin08_token = request.form['admin08_token_assigned']
+        admin08_name = request.form['admin08_name_assigned']
+        admin08_affiliation = request.form['admin08_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2] 
+               
+        return render_template('admin_token_assign_08.html', 
+        admin08_token = admin08_token,
+        admin08_name = admin08_name,
+        admin08_affiliation = admin08_affiliation)
+
+@app.route('/admin_token_assign_09', methods=['POST', 'GET'])
+def admin_token_assign_09():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin09_token = request.form['admin09_token_assigned']
+        admin09_name = request.form['admin09_name_assigned']
+        admin09_affiliation = request.form['admin09_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2] 
+               
+        return render_template('admin_token_assign_09.html', 
+        admin09_token = admin09_token,
+        admin09_name = admin09_name,
+        admin09_affiliation = admin09_affiliation)
+
+@app.route('/admin_token_assign_10', methods=['POST', 'GET'])
+def admin_token_assign_10():
+    if request.method == 'POST':
+
+        # get new values from form
+        admin10_token = request.form['admin10_token_assigned']
+        admin10_name = request.form['admin10_name_assigned']
+        admin10_affiliation = request.form['admin10_affiliation_assigned']
+
+        # create dictionary from form responses, then convert to data frame
+        response_dict = request.form.to_dict()
+        response_df = pd.DataFrame([response_dict.values()], columns=response_dict.keys())
+
+        # get unchanged values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin02_token = admin_tokens.iat[1,0]
+        admin02_name = admin_tokens.iat[1,1]
+        admin02_affiliation = admin_tokens.iat[1,2]
+        admin03_token = admin_tokens.iat[2,0]
+        admin03_name = admin_tokens.iat[2,1]
+        admin03_affiliation = admin_tokens.iat[2,2]
+        admin04_token = admin_tokens.iat[3,0]
+        admin04_name = admin_tokens.iat[3,1]
+        admin04_affiliation = admin_tokens.iat[3,2]
+        admin05_token = admin_tokens.iat[4,0]
+        admin05_name = admin_tokens.iat[4,1]
+        admin05_affiliation = admin_tokens.iat[4,2]
+        admin06_token = admin_tokens.iat[5,0]
+        admin06_name = admin_tokens.iat[5,1]
+        admin06_affiliation = admin_tokens.iat[5,2]
+        admin07_token = admin_tokens.iat[6,0]
+        admin07_name = admin_tokens.iat[6,1]
+        admin07_affiliation = admin_tokens.iat[6,2]
+        admin08_token = admin_tokens.iat[7,0]
+        admin08_name = admin_tokens.iat[7,1]
+        admin08_affiliation = admin_tokens.iat[7,2]
+        admin09_token = admin_tokens.iat[8,0]
+        admin09_name = admin_tokens.iat[8,1]
+        admin09_affiliation = admin_tokens.iat[8,2]
+        admin01_token = admin_tokens.iat[0,0]
+        admin01_name = admin_tokens.iat[0,1]
+        admin01_affiliation = admin_tokens.iat[0,2]
+        admin00_token = admin_tokens.iat[10,0]
+        admin00_name = admin_tokens.iat[10,1]
+        admin00_affiliation = admin_tokens.iat[10,2]
+
+        # merge current and new token assignments
+        dongles = [admin01_token, admin02_token, admin03_token, admin04_token, admin05_token, 
+        admin06_token, admin07_token, admin08_token, admin09_token, admin10_token, admin00_token] 
+        names = [admin01_name, admin02_name, admin03_name, admin04_name, admin05_name, 
+        admin06_name, admin07_name, admin08_name, admin09_name, admin10_name, admin00_name] 
+        affiliations = [admin01_affiliation, admin02_affiliation, admin03_affiliation, admin04_affiliation, admin05_affiliation, 
+        admin06_affiliation, admin07_affiliation, admin08_affiliation, admin09_affiliation, admin10_affiliation, admin00_affiliation] 
+
+        # create dataframe with new tokens
+        new_tokens_list = [
+            [admin01_token, admin01_name, admin01_affiliation],
+            [admin02_token, admin02_name, admin02_affiliation],
+            [admin03_token, admin03_name, admin03_affiliation],
+            [admin04_token, admin04_name, admin04_affiliation],
+            [admin05_token, admin05_name, admin05_affiliation],
+            [admin06_token, admin06_name, admin06_affiliation],
+            [admin07_token, admin07_name, admin07_affiliation],
+            [admin08_token, admin08_name, admin08_affiliation],
+            [admin09_token, admin09_name, admin09_affiliation],
+            [admin10_token, admin10_name, admin10_affiliation],
+            [admin00_token, admin00_name, admin00_affiliation]
+            ]
+        new_tokens_df = pd.DataFrame(new_tokens_list, columns = ['dongle', 'name', 'affiliation'])
+
+        # export to CSV
+        new_tokens_df.to_csv('static/admin-tokens.csv', encoding='utf-8', index=False)
+
+        return redirect(url_for('admin_tokens'))
+
+    else:  
+
+        # get current values from CSV file
+        admin_tokens = pd.read_csv('static/admin-tokens.csv')  
+        admin10_token = admin_tokens.iat[9,0]
+        admin10_name = admin_tokens.iat[9,1]
+        admin10_affiliation = admin_tokens.iat[9,2] 
+               
+        return render_template('admin_token_assign_10.html', 
+        admin10_token = admin10_token,
+        admin10_name = admin10_name,
+        admin10_affiliation = admin10_affiliation)
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/data2usb')
 def data2usb(): 

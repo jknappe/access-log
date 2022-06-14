@@ -72,6 +72,15 @@ html{
     color: #333333;
   }
   
+div.display_name {
+  font-size: 2.0em;
+  font-style: normal;
+  font-weight: bold;
+  background-color: #333333;
+  text-align: center;
+  color: #ffffff;
+}
+
 div.pincode {
   font-size: 3.0em;
   font-style: normal;
@@ -205,6 +214,27 @@ table[name=admin]{
   width: 170px;
 }
 .next-button:first-line {
+  font-style: normal;
+  color: #ffffff;
+}
+
+.assign-button {
+  background-color: #5A696E;
+  border: none;
+  padding: 2px 2px;
+  font-style: italic;
+  color: #dddddd;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.0em;
+  margin: 2px 2px;
+  cursor: pointer;
+  float: right;
+  margin-right: 10px;
+  width: 200px;
+}
+.assign-button:first-line {
   font-style: normal;
   color: #ffffff;
 }

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #00937F;}
+   </style>
+<title>Admin Dongles zuweisen · Assign admin dongles</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    
+    <h1>Admin Dongles zuweisen <span>· Assign admin dongles</span></h1>   
+    
+    <hr />
+
+    <div class="deutsch">
+        Bitte geben Sie die neuen Admin Dongle Zuweisungen ein.
+    </div>
+
+    <div class="english">
+        Please enter the admin dongle assignments.
+    </div>
+
+    <hr />
+
+    <form id="admin_token_assign_09" name="admin_token_assign_09" action="admin_token_assign_09" method="POST" autocomplete="off">
+
+        <div>
+            <input type="hidden" name="admin09_token_assigned" value="0004499470w"> 
+            <label for="admin09_name_assigned" class="deutsch">Derzeit zugewiesener Name </label>
+            <label for="admin09_name_assigned" class="english">· Currently assigned name: <br />{{ admin09_name }}</label><br />
+            <input type="text" name="admin09_name_assigned" id="admin09_name_assigned" placeholder="Neuer Name · New name" size="50"}} /><br /><br />
+            <label for="admin09_affiliation_assigned" class="deutsch">Derzeit zugewiesene Zugehörigkeit </label>
+            <label for="admin09_affiliation_assigned" class="english">· Currently assigned affiliation: <br />{{ admin09_affiliation }}</label><br />
+            <input type="text" name="admin09_affiliation_assigned" id="admin09_affiliation_assigned" placeholder="Neue Zugehörigkeit · New affiliation" size="50"}} />
+            <br />
+            <br />
+        </div>        
+
+        <div>
+            <button id="admin_token_assign_09_submit" type="submit" class="next-button">Speichern<br /><i>Save</i></button>
+        </div>  
+
+    </form>    
+
+    <!-- return back button -->
+    <a href="{{ url_for('admin_tokens') }}" class="home-button" id="home-button">Zurück<br /><i>Back</i> </a>
+
+</div>
+
+    <!-- JS for automatic redirect after two minutes -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/";
+
+        }, 120000);
+
+    </script>
+
+{% endblock %}
