@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+    body {background-color: #00937F;}
+   </style>
+<style>
+    body {background-color: #9CC666;}
+   </style>
+    <title>Daten kopieren · Copy data</title>
+{% endblock %}
+
+{% block body %}
+
+    <div class="content">
+        
+        <h1>Daten auf USB kopieren <span>· Copy data to USB</span></h1>
+        <hr />
+
+        <br />
+        
+        <div class="deutsch">
+            USB-Stick anschließen und auf die Schaltfläche unten klicken, um Daten zu kopieren.
+        </div>
+
+        <div class="english">
+            Insert USB pen drive and click below to copy data.
+        </div>
+
+        <br />
+        <br />
+
+        <div style="width:370px; margin:0 auto;">
+            <a href="{{ url_for('data2usb') }}" class="admin-button">Daten auf USB-Stick kopieren<br /><i>Copy data to USB drive</i> </a>
+        </div>
+
+        <br />
+        <br />
+
+        <!-- retuen home button -->
+        <a href="{{ url_for('admin') }}" class="home-button">Zurück<br /><i>Back</i> </a>  
+
+    </div>
+
+    <!-- JS for automatic redirect after wrong token entry -->
+    <script>    
+        window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "/admin";
+
+        }, 120000);
+
+    </script>
+
+{% endblock %}

@@ -1520,16 +1520,9 @@ def admin_token_assign_10():
         admin10_affiliation = admin10_affiliation)
 
 
-
-
-
-
-
-
-
-
-
-
+@app.route('/admin_data2usb', methods=['POST', 'GET'])
+def admin_data2usb():  
+    return render_template('admin_data2usb.html')
 
 @app.route('/data2usb')
 def data2usb(): 
